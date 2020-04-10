@@ -27,7 +27,7 @@ export default class MainScene extends Phaser.Scene {
 
   //path declaration for enemies
   var path = this.add.path(352, -32);
-  path.lineTo(352, 512);
+  path.lineTo(352, 544);
 
   //graphics used for path visualization: line
   graphics.lineStyle(3, 0xffffff, 1);

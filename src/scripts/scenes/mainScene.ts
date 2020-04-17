@@ -1,9 +1,12 @@
 import ExampleObject from '../objects/exampleObject';
 import ExampleTower from './exampleTower';
+import EnemyObject from '../objects/enemyObject';
 
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
+  enemyObject: Phaser.GameObjects.PathFollower;
   exampleTower: Phaser.Physics.Arcade.Sprite;
+  path: Phaser.Curves.Path;
   
 
   constructor() {
@@ -29,12 +32,12 @@ export default class MainScene extends Phaser.Scene {
   graphics.fillPath();
 
   //path declaration for enemies
-  var path = this.add.path(352, -32);
-  path.lineTo(352, 544);
+  this.path = new Phaser.Curves.Path(352, -32);
+  this.path.lineTo(352, 544);
 
   //graphics used for path visualization: line
   graphics.lineStyle(3, 0xffffff, 1);
-  path.draw(graphics);
+  this.path.draw(graphics);
 
 
   /* GRID */
@@ -42,9 +45,14 @@ export default class MainScene extends Phaser.Scene {
   //drawGrid function is defined below the update function
   this.drawGrid(graphics);
 
+  this.enemyObject = new EnemyObject(this, this.path);
+
   }
 
   update() {
+
+    this.moveEnemy();
+    this.respawnEnemy();
 
     if (this.game.input.activePointer.isDown) {
       this.placeTower();
@@ -63,6 +71,16 @@ export default class MainScene extends Phaser.Scene {
       graphics.lineTo(j * 64, 512);
     }
     graphics.strokePath();
+  }
+
+  moveEnemy(){
+    this.enemyObject.y ++;
+  }
+
+  respawnEnemy(){
+    if (this.enemyObject.y > 546){
+      this.enemyObject.y = -32;
+    }
   }
 
   placeTower() {

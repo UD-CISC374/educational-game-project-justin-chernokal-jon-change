@@ -6,6 +6,7 @@ import GameConfig = Phaser.Types.Core.GameConfig;
 const DEFAULT_WIDTH = 640;
 const DEFAULT_HEIGHT = 512;
 
+//TEST BRANCH COMMIT
 
 const config: GameConfig = {
     backgroundColor: '#ffffff',

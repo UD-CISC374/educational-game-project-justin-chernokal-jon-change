@@ -4,7 +4,10 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-    //this.load.image('exampleTower', './assets/images/...');
+    this.load.spritesheet("exampleTower", "./assets/spritesheets/wind_sprite_anim.png", {
+      frameWidth: 160,
+      frameHeight: 130
+    });
   }
 
   create() {

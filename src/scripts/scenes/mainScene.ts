@@ -1,4 +1,5 @@
 import ExampleObject from '../objects/exampleObject';
+import ExampleTower from './exampleTower';
 
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
@@ -46,7 +47,7 @@ export default class MainScene extends Phaser.Scene {
   update() {
 
     if (this.game.input.activePointer.isDown) {
-      placeTower();
+      this.placeTower();
     }
   }
 
@@ -65,6 +66,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   placeTower() {
-
+    var exTower = new ExampleTower(this);
   }
 }

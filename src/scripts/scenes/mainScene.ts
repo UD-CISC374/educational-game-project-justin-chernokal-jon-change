@@ -2,6 +2,7 @@ import ExampleObject from '../objects/exampleObject';
 
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
+  exampleTower: Phaser.Physics.Arcade.Sprite;
   
 
   constructor() {
@@ -10,6 +11,7 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.exampleObject = new ExampleObject(this, 0, 0);
+    //this.exampleTower = this.physics.add.sprite;
   
 
   /* PATH */
@@ -42,6 +44,10 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
+
+    if (this.game.input.activePointer.isDown) {
+      placeTower();
+    }
   }
 
 
@@ -56,5 +62,9 @@ export default class MainScene extends Phaser.Scene {
       graphics.lineTo(j * 64, 512);
     }
     graphics.strokePath();
+  }
+
+  placeTower() {
+
   }
 }

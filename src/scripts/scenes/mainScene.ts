@@ -1,5 +1,5 @@
 import ExampleObject from '../objects/exampleObject';
-import ExampleTower from './exampleTower';
+import ExampleTower from '../objects/exampleTower';
 import EnemyObject from '../objects/enemyObject';
 
 export default class MainScene extends Phaser.Scene {

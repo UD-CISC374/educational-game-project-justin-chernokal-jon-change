@@ -9,6 +9,16 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 130
     });
 
+    this.load.spritesheet("enemyObject", "./assets/spritesheets/ship3.png", {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+
+    this.load.spritesheet("exampleObject", "./assets/spritesheets/ship2.png", {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+
   }
 
   create() {

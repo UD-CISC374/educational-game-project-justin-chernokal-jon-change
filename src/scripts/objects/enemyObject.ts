@@ -4,7 +4,7 @@ export default class EnemyObject extends Phaser.GameObjects.PathFollower {
         var x = 352;
         var y = -10;
 
-        super(scene, path,  x, y, 'eney');
+        super(scene, path,  x, y, 'enemyObject');
         scene.add.existing(this);
     }
 

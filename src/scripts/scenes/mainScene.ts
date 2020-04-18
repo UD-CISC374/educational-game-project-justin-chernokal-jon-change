@@ -8,6 +8,7 @@ export default class MainScene extends Phaser.Scene {
   exampleTower: Phaser.Physics.Arcade.Sprite;
   path: Phaser.Curves.Path;
 
+  // enemy path = -1; open tower slot = 0; blocked/used tower slot = 1
   map = [[0,0,0,0,0,-1,0,0,0,0],
          [0,0,0,0,0,-1,0,0,0,0],
          [0,0,0,0,0,-1,0,0,0,0],

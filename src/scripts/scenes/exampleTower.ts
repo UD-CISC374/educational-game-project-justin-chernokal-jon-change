@@ -1,10 +1,22 @@
 export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene) {
-        var x = 200;
-        var y = 200;
+    constructor(scene,i,j,map) {
+        var x = j * 64 + 32;
+        var y = i * 64;
+        
         
         super(scene,x,y,"exampleTower");
 
         scene.add.existing(this);
+       
     }
+    // Turret(scene) {
+    //     Phaser.GameObjects.Image.call(this,scene,0,0,this.nextTic=0;)
+    // }
+
+    // place(i, j) {
+    //     this.y = i * 64 + 64/2;
+    //     this.x = j * 64 + 64/2;
+    //     map[i][j] = 1;
+    // }
+
 }

@@ -4,15 +4,26 @@ import ExampleTower from './exampleTower';
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
   exampleTower: Phaser.Physics.Arcade.Sprite;
+
+  map = [[0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0],
+         [0,0,0,0,0,-1,0,0,0,0]];
   
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
+ 
+
   create() {
     this.exampleObject = new ExampleObject(this, 0, 0);
-    //this.exampleTower = this.physics.add.sprite;
+    //this.towers = this.physics.add.group({classType:Tower, runChildUpdate: true} );
   
 
   /* PATH */
@@ -66,6 +77,13 @@ export default class MainScene extends Phaser.Scene {
   }
 
   placeTower() {
-    var exTower = new ExampleTower(this);
+    var i = Math.floor(this.input.mousePointer.y/64);
+    var j = Math.floor(this.input.mousePointer.x/64);
+
+    if(this.map[i][j] === 0) {
+      var tower = new ExampleTower(this,i,j,this.map);
+      this.map[i][j] = 1;
+    }
+    
   }
 }

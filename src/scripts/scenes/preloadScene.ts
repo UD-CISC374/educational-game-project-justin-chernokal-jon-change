@@ -8,6 +8,7 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 160,
       frameHeight: 130
     });
+
   }
 
   create() {

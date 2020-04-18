@@ -8,6 +8,8 @@ export default class MainScene extends Phaser.Scene {
   exampleTower: Phaser.Physics.Arcade.Sprite;
   path: Phaser.Curves.Path;
 
+
+
   // enemy path = -1; open tower slot = 0; blocked/used tower slot = 1
   map = [[0,0,0,0,0,-1,0,0,0,0],
          [0,0,0,0,0,-1,0,0,0,0],
@@ -23,12 +25,12 @@ export default class MainScene extends Phaser.Scene {
     super({ key: 'MainScene' });
   }
 
- 
+ //ENEMY SPAWN x = 352 y = 0
 
   create() {
     this.exampleObject = new ExampleObject(this, 0, 0);
-    //this.towers = this.physics.add.group({classType:Tower, runChildUpdate: true} );
-  
+    
+    
 
   /* PATH */
   //graphics used for path visualization: background

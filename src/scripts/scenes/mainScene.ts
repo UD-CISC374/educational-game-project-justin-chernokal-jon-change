@@ -10,8 +10,13 @@ export default class MainScene extends Phaser.Scene {
 
   //towers: Phaser.Physics.Arcade.Group;
 
+  towerCount = 0;
+
   textTowerLabel;
-  towerValue;
+  towerValue = 1;
+  towerButtonUp;
+  towerButtonDown;
+
 
 
   // enemy path = -1; open tower slot = 0; blocked/used tower slot = 1
@@ -81,6 +86,11 @@ export default class MainScene extends Phaser.Scene {
     if (this.game.input.activePointer.isDown) {
       this.placeTower();
     }
+
+    if (this.towerCount > 0) {
+      this.textTowerLabel.text = this.towerValue;
+    }
+    
   }
 
 
@@ -119,12 +129,33 @@ export default class MainScene extends Phaser.Scene {
       //this.exampleTower = this.physics.add.sprite(0,0,"exampleTower");
       var tower = new ExampleTower(this,i,j,this.map);
       this.map[i][j] = 1;
-
-      this.towerValue = 1;
-      this.textTowerLabel = this.add.bitmapText(x - 84, y, "pixelFont", this.towerValue, 36);
+     
     }
+
+    this.towerCount += 1;
     
   }
+
+  towerValueUp() {
+    if(this.towerValue >= 2) {
+      this.towerValue = 2;
+    }
+
+    else {
+      ++this.towerValue;
+    }
+  }
+
+  towerValueDown() {
+    if(this.towerValue <= 1) {
+      this.towerValue = 1;
+    }
+
+    else {
+      --this.towerValue;
+    }
+  }
+
 
   towerAdd() {
     //this.enemyObject.value += this.exampleTower.value

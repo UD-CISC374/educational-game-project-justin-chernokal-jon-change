@@ -21,8 +21,8 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
             scene.towerValueDown();
         });
         
-        
-        scene.add.existing(this);
+        scene.physics.add.sprite(x,y,"exampleTower");
+        //scene.add.existing(this);
        
     }
 

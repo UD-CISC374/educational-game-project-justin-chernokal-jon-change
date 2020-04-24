@@ -8,7 +8,8 @@ export default class MainScene extends Phaser.Scene {
   exampleTower: Phaser.Physics.Arcade.Sprite;
   path: Phaser.Curves.Path;
 
-  //towers: Phaser.Physics.Arcade.Group;
+  towers: Phaser.Physics.Arcade.Group;
+  enemies: Phaser.Physics.Arcade.Group;
 
   towerCount = 0;
 
@@ -16,6 +17,11 @@ export default class MainScene extends Phaser.Scene {
   towerValue = 1;
   towerButtonUp;
   towerButtonDown;
+
+  enemyObjectLabel;
+  enemyObjectValue = 1;
+
+
 
 
 
@@ -70,11 +76,15 @@ export default class MainScene extends Phaser.Scene {
 
     this.enemyObject = new EnemyObject(this, this.path);
 
-    //this.towers = this.physics.add.group();
+    this.towers = this.physics.add.group();
+    this.enemies = this.physics.add.group();
+    this.enemies.add(this.enemyObject);
 
-    //this.physics.add.overlap(this.exampleTower, this.enemyObject, this.towerAdd);
+    this.physics.add.overlap(this.towers, this.enemyObject, this.towerAdd, function (tower,enemyObject) {
+    },
+    this);
+
     
-
 
   }
 
@@ -128,9 +138,14 @@ export default class MainScene extends Phaser.Scene {
 
       //this.exampleTower = this.physics.add.sprite(0,0,"exampleTower");
       var tower = new ExampleTower(this,i,j,this.map);
+
+      this.towers.add(tower);
+
       this.map[i][j] = 1;
      
     }
+
+    //this.physics.add.overlap(this.tower, this.enemyObject, this,)
 
     this.towerCount += 1;
     
@@ -157,7 +172,17 @@ export default class MainScene extends Phaser.Scene {
   }
 
 
-  towerAdd() {
-    //this.enemyObject.value += this.exampleTower.value
+  towerAdd(tower, enemyObject) {
+    // if(!enemyObject.hasOverlapped) {
+    //   enemyObject.hasOverlapped = true;
+
+    //   this.enemyObjectValue = this.enemyObjectValue + this.towerValue;
+    //   this.enemyObjectLabel.text = "Enemy: " + this.enemyObjectValue;
+    // }   
+
+
+    this.enemyObjectValue = this.enemyObjectValue + this.towerValue;
+    this.enemyObjectLabel.text = "Enemy: " + this.enemyObjectValue;
+
   }
 }

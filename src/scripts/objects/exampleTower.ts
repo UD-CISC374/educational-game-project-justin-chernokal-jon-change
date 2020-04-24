@@ -1,7 +1,7 @@
 export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
     constructor(scene,i,j,map) {
-        var x = j * 64 +32;
-        var y = i * 64 +32;
+        var x = j * 64 + 64;
+        var y = i * 64 + 32;
         
         
         super(scene,x,y,"exampleTower");

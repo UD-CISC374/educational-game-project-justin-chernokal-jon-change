@@ -8,17 +8,21 @@ export default class MainScene extends Phaser.Scene {
   exampleTower: Phaser.Physics.Arcade.Sprite;
   path: Phaser.Curves.Path;
 
+  //towers: Phaser.Physics.Arcade.Group;
+
+  textTowerLabel;
+  towerValue;
 
 
   // enemy path = -1; open tower slot = 0; blocked/used tower slot = 1
-  map = [[0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0],
-         [0,0,0,0,0,-1,0,0,0,0]];
+  map = [[1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,0,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1]];
   
 
   constructor() {
@@ -32,34 +36,40 @@ export default class MainScene extends Phaser.Scene {
     
     
 
-  /* PATH */
-  //graphics used for path visualization: background
-  var graphics = this.add.graphics();
-  graphics.fillStyle(0x000000, 1);
-  graphics.beginPath();
-  graphics.moveTo(0, 0);
-  graphics.lineTo(this.scale.width, 0);
-  graphics.lineTo(this.scale.width, 512);
-  graphics.lineTo(0, 640);
-  graphics.lineTo(0, 0);
-  graphics.closePath();
-  graphics.fillPath();
+    /* PATH */
+    //graphics used for path visualization: background
+    var graphics = this.add.graphics();
+    graphics.fillStyle(0x000000, 1);
+    graphics.beginPath();
+    graphics.moveTo(0, 0);
+    graphics.lineTo(this.scale.width, 0);
+    graphics.lineTo(this.scale.width, 512);
+    graphics.lineTo(0, 640);
+    graphics.lineTo(0, 0);
+    graphics.closePath();
+    graphics.fillPath();
 
-  //path declaration for enemies
-  this.path = new Phaser.Curves.Path(352, -32);
-  this.path.lineTo(352, 544);
+    //path declaration for enemies
+    this.path = new Phaser.Curves.Path(352, -32);
+    this.path.lineTo(352, 544);
 
-  //graphics used for path visualization: line
-  graphics.lineStyle(3, 0xffffff, 1);
-  this.path.draw(graphics);
+    //graphics used for path visualization: line
+    graphics.lineStyle(3, 0xffffff, 1);
+    this.path.draw(graphics);
 
 
-  /* GRID */
-  var graphics = this.add.graphics();
-  //drawGrid function is defined below the update function
-  this.drawGrid(graphics);
+    /* GRID */
+    var graphics = this.add.graphics();
+    //drawGrid function is defined below the update function
+    this.drawGrid(graphics);
 
-  this.enemyObject = new EnemyObject(this, this.path);
+    this.enemyObject = new EnemyObject(this, this.path);
+
+    //this.towers = this.physics.add.group();
+
+    //this.physics.add.overlap(this.exampleTower, this.enemyObject, this.towerAdd);
+    
+
 
   }
 
@@ -102,9 +112,21 @@ export default class MainScene extends Phaser.Scene {
     var j = Math.floor(this.input.mousePointer.x/64);
 
     if(this.map[i][j] === 0) {
+
+      var x = j * 64 + 64;
+      var y = i * 64 + 32;
+
+      //this.exampleTower = this.physics.add.sprite(0,0,"exampleTower");
       var tower = new ExampleTower(this,i,j,this.map);
       this.map[i][j] = 1;
+
+      this.towerValue = 1;
+      this.textTowerLabel = this.add.bitmapText(x - 84, y, "pixelFont", this.towerValue, 36);
     }
     
+  }
+
+  towerAdd() {
+    //this.enemyObject.value += this.exampleTower.value
   }
 }

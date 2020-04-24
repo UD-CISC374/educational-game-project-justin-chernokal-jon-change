@@ -5,8 +5,8 @@ export default class PreloadScene extends Phaser.Scene {
 
   preload() {
     this.load.spritesheet("exampleTower", "./assets/spritesheets/tower_add.png", {
-      frameWidth: 160,
-      frameHeight: 130
+      frameWidth: 128,
+      frameHeight: 64
     });
 
     this.load.spritesheet("enemyObject", "./assets/spritesheets/ship3.png", {
@@ -18,6 +18,9 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
+
+    this.load.bitmapFont("pixelFont", "./assets/font/font.png", "assets/font/font.xml");
+
 
   }
 

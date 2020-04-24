@@ -4,6 +4,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/citations.md"
   },
   {
+    "revision": "9d79a2ec01455afa082d23e42f457801",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/font/font.png"
+  },
+  {
+    "revision": "38c02ad8ccaf9579150bb10d283e2b0c",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/font/font.xml"
+  },
+  {
     "revision": "53cefca2a0f75654486b180949686165",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/icons/favicon.ico"
   },
@@ -76,6 +84,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/spritesheets/ship3.png"
   },
   {
+    "revision": "a87cb4644c37aee620a0307439bc04fe",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/spritesheets/tower_add.png"
+  },
+  {
     "revision": "4befcfd3ed56b3a01365a4f4ae3901f1",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/spritesheets/wind_sprite_anim.png"
   },
@@ -84,15 +96,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devfavicon.ico"
   },
   {
-    "revision": "c11eb5610c73248df0ae",
-    "url": "/educational-game-project-justin-chernokal-jon-change/devgen.main.ca49e04bf6a0caef7161.bundle.js"
+    "revision": "1b2866209b1dc1e27856",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devgen.main.9aeea792b535f7171081.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/devgen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "06ca836d724d2f423c41a7133f3fbf96",
+    "revision": "282de61fc5559bfbc8a9c9dbdc652cb2",
     "url": "/educational-game-project-justin-chernokal-jon-change/devindex.html"
   },
   {

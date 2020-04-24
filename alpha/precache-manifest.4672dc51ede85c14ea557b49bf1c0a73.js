@@ -4,6 +4,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/citations.md"
   },
   {
+    "revision": "9d79a2ec01455afa082d23e42f457801",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/font/font.png"
+  },
+  {
+    "revision": "38c02ad8ccaf9579150bb10d283e2b0c",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/font/font.xml"
+  },
+  {
     "revision": "53cefca2a0f75654486b180949686165",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/icons/favicon.ico"
   },
@@ -76,6 +84,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/spritesheets/ship3.png"
   },
   {
+    "revision": "a87cb4644c37aee620a0307439bc04fe",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/spritesheets/tower_add.png"
+  },
+  {
     "revision": "4befcfd3ed56b3a01365a4f4ae3901f1",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/spritesheets/wind_sprite_anim.png"
   },
@@ -84,15 +96,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/alphafavicon.ico"
   },
   {
-    "revision": "6aaeb4ed8139e735cd2e",
-    "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.main.bf537538bbeae448ca34.bundle.js"
+    "revision": "3b3e1075f92371db42de",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.main.49608ed21f98cf256e72.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "dd1edb94888b734e116a63138e712a1d",
+    "revision": "a9182ee01a607eae6b568c446540857c",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaindex.html"
   },
   {

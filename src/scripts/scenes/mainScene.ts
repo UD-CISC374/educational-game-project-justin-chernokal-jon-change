@@ -4,7 +4,13 @@ import EnemyObject from '../objects/enemyObject';
 
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
-  enemyObject: Phaser.GameObjects.PathFollower;
+  enemyObject: Phaser.Physics.Arcade.Sprite;
+  enemyObject2: Phaser.Physics.Arcade.Sprite;
+  enemyObject3: Phaser.Physics.Arcade.Sprite;
+  enemyObject0: Phaser.Physics.Arcade.Sprite;
+
+  data: Phaser.Data.DataManager;
+
   exampleTower: Phaser.Physics.Arcade.Sprite;
   path: Phaser.Curves.Path;
 
@@ -44,8 +50,14 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     this.exampleObject = new ExampleObject(this, 0, 0);
-    
-    
+
+    /* Hash table */
+    //stores number sprite keys
+    this.data.set('0', 'enemy0');
+    this.data.set('1', 'enemy1');
+    this.data.set('2', 'enemy2');
+    this.data.set('3', 'enemy3');
+
 
     /* PATH */
     //graphics used for path visualization: background
@@ -74,20 +86,48 @@ export default class MainScene extends Phaser.Scene {
     //drawGrid function is defined below the update function
     this.drawGrid(graphics);
 
-    this.enemyObject = new EnemyObject(this, this.path);
+    /*TEXT*/
+    //Text labels
+    this.add.text(120, 2, "Make Values 2", {font: "15px Arial", fill: "red"});
+    this.add.text(260, 200, "Click to", {font: "10px Arial", fill: "white"});
+    this.add.text(260, 220, "Place Tower", {font: "10px Arial", fill: "white"});
 
-    this.towers = this.physics.add.group();
+
+    /*Enemy*/
+    //spawn
+    this.enemyObject = new EnemyObject(this, 352, -10, "enemy1");
+    this.enemyObject2= new EnemyObject(this, 352, -70, "enemy2");
+    this.enemyObject3 = new EnemyObject(this, 352, -130, "enemy3");
+    this.enemyObject0= new EnemyObject(this, 352, -190, "enemy0");
+    this.enemyObject.setScale(0.40);
+    this.enemyObject2.setScale(0.40);
+    this.enemyObject3.setScale(0.40);
+    this.enemyObject0.setScale(0.40);
+
+
     this.enemies = this.physics.add.group();
     this.enemies.add(this.enemyObject);
+    this.enemies.add(this.enemyObject2);
+    this.enemies.add(this.enemyObject3);
+    this.enemies.add(this.enemyObject0);
+    this.enemyObject.setDataEnabled();
+    this.enemyObject.data.set('value', 1);
 
-    this.physics.add.overlap(this.towers, this.enemyObject, this.towerAdd, function (tower,enemyObject) {
+
+    /* Tower Group */
+    this.towers = this.physics.add.group();
+    
+
+    /* Overlap Physics */
+    this.physics.add.overlap(this.towers, this.enemies, this.towerAdd, function (tower,enemy) {
     },
     this);
-
     
+    console.log(this.enemies.getFirst());
 
   }
 
+  /*Update*/
   update() {
 
     this.moveEnemy();
@@ -95,10 +135,10 @@ export default class MainScene extends Phaser.Scene {
 
     if (this.game.input.activePointer.isDown) {
       this.placeTower();
-    }
 
-    if (this.towerCount > 0) {
-      this.textTowerLabel.text = this.towerValue;
+      if (this.towerCount > 0) {
+        this.textTowerLabel.text = this.towerValue;
+      }
     }
     
   }
@@ -117,16 +157,32 @@ export default class MainScene extends Phaser.Scene {
     graphics.strokePath();
   }
 
+  /* Enemy Update Functions */
   moveEnemy(){
-    this.enemyObject.y ++;
+    this.enemies.incY(1);
   }
 
   respawnEnemy(){
+
+    
     if (this.enemyObject.y > 546){
       this.enemyObject.y = -32;
     }
+  
+    if (this.enemyObject2.y > 546){
+      this.enemyObject2.y = -32;
+    }
+
+    if (this.enemyObject3.y > 546){
+      this.enemyObject3.y = -32;
+    }
+  
+    if (this.enemyObject0.y > 546){
+      this.enemyObject0.y = -32;
+    }
   }
 
+  /* Tower Interaction */
   placeTower() {
     var i = Math.floor(this.input.mousePointer.y/64);
     var j = Math.floor(this.input.mousePointer.x/64);
@@ -142,12 +198,15 @@ export default class MainScene extends Phaser.Scene {
       this.towers.add(tower);
 
       this.map[i][j] = 1;
+
+      this.towerCount += 1;
      
     }
 
     //this.physics.add.overlap(this.tower, this.enemyObject, this,)
 
-    this.towerCount += 1;
+    
+    
     
   }
 
@@ -172,17 +231,35 @@ export default class MainScene extends Phaser.Scene {
   }
 
 
-  towerAdd(tower, enemyObject) {
-    // if(!enemyObject.hasOverlapped) {
-    //   enemyObject.hasOverlapped = true;
+  towerAdd(tower, enemy) {
+      
 
-    //   this.enemyObjectValue = this.enemyObjectValue + this.towerValue;
-    //   this.enemyObjectLabel.text = "Enemy: " + this.enemyObjectValue;
-    // }   
+    //Check for Number 1 object and changes it
+    if(enemy == this.enemyObject){
+    
+    this.enemyObject.setActive(false);
 
+    this.enemyObjectValue = this.towerValue + this.enemyObject.data.get('value');
+    var key = this.enemyObjectValue.toString();
+    
+    //call to make new number
+    this.enemy1Change(enemy.x, enemy.y, this.data.get("1"), key);
 
-    this.enemyObjectValue = this.enemyObjectValue + this.towerValue;
-    this.enemyObjectLabel.text = "Enemy: " + this.enemyObjectValue;
+    //destroy old number
+    this.enemyObject.destroy();
+    }
+
+    //update "Enemy" value (right now adds the differnce between old and new numbers)
+    this.enemyObjectLabel = this.add.bitmapText(100, 100, "pixelFont", 'Enemy: ' + this.towerValue, 36);
 
   }
+
+  //Creates new nubmer object
+  enemy1Change(posX, posY, currVal, key){
+
+    var numNew = (this.towerValue + currVal);
+
+    this.enemies.create(posX, posY + 60, this.data.get(key)).setScale(0.40);
+  }
+
 }

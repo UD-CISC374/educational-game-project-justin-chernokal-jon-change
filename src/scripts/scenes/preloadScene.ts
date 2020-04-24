@@ -9,16 +9,58 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     });
 
-    this.load.spritesheet("enemyObject", "./assets/spritesheets/ship3.png", {
-      frameWidth: 32,
-      frameHeight: 32
+    /* NUMBER IMAGES */
+    this.load.spritesheet('enemy0', "./assets/images/0.png",{
+      frameWidth: 64,
+      frameHeight: 64
     });
 
-    this.load.spritesheet("exampleObject", "./assets/spritesheets/ship2.png", {
-      frameWidth: 32,
-      frameHeight: 32
+    this.load.spritesheet("enemy1", "./assets/images/i.png",{
+      frameWidth: 64,
+      frameHeight: 64
     });
 
+    this.load.spritesheet("enemy2", "./assets/images/z.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy3", "./assets/images/3.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy4", "./assets/images/4.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy5", "./assets/images/5.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy6", "./assets/images/6.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy7", "./assets/images/7.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy8", "./assets/images/8.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet("enemy9", "./assets/images/9.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    /* Font */
     this.load.bitmapFont("pixelFont", "./assets/font/font.png", "assets/font/font.xml");
 
 

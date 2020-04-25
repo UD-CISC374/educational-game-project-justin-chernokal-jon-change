@@ -1,13 +1,13 @@
 {
   "name": "educational-game-project-justin-chernokal-jon-change",
   "version": "0.0.2",
-  "description": "Phaser 3 starter template for educational games, using TypeScript, webpack, and Github Pages.",
-  "homepage": "https://github.com/acbart/educational-phaser-game-template#readme",
+  "description": "Place towers representing algebraic operaters to manipulate enemy values so they match the objective value.",
+  "homepage": "https://github.com/UD-CISC374/educational-game-project-justin-chernokal-jon-change/blob/master/egdd.md",
   "main": "index.js",
   "game": {
     "url": "educational-game-project-justin-chernokal-jon-change",
-    "shortName": "EdGame",
-    "name": "Educational Phaser Game Template"
+    "shortName": "CalcAtk",
+    "name": "Calculated Assault"
   },
   "author": {
     "name": "Austin Cory Bart",
@@ -17,6 +17,7 @@
     "type": "git",
     "url": "https://github.com/UD-CISC374/educational-game-project-justin-chernokal-jon-change"
   },
+  "contributors": "(http://examples.phaser.io/_site/view_full.html?d=arcade%20physics&f=shoot+the+pointer.js&t=shoot%20the%20pointer)",
   "scripts": {
     "start": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",

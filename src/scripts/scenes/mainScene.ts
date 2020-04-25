@@ -35,9 +35,9 @@ export default class MainScene extends Phaser.Scene {
   map = [[1,1,1,1,1,-1,1,1,1,1],
          [1,1,1,1,1,-1,1,1,1,1],
          [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
+         [1,1,1,1,1,-1,1,1,1,1],
          [1,1,1,1,0,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1],
          [1,1,1,1,1,-1,1,1,1,1],
          [1,1,1,1,1,-1,1,1,1,1]];
   
@@ -88,20 +88,24 @@ export default class MainScene extends Phaser.Scene {
 
     /*TEXT*/
     //Text labels
-    this.add.text(20, 2, "Click the specified location to place a tower.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 20, "Towers will add its value to the moving objects.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 35, "Change the objects' number to meet the objective.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 60, "Objective: Make Values = 2", {font: "20px Arial", fill: "red"});
-    this.add.text(260, 200, "Click to", {font: "10px Arial", fill: "white"});
-    this.add.text(260, 220, "Place Tower", {font: "10px Arial", fill: "white"});
+    this.add.text(20, 5, "Click the specified location to place a tower.", {font: "15px Arial", fill: "white"});
+    this.add.text(20, 30, "Towers will add the value on left to the", {font: "15px Arial", fill: "white"});
+    this.add.text(20, 45, "moving objects.", {font: "15px Arial", fill: "white"});
+    this.add.text(20, 70, 'Change the tower value by clicking', {font: "15px Arial", fill: "white"});
+    this.add.text(20, 85, '"MORE" and "LESS".', {font: "15px Arial", fill: "white"});
+    this.add.text(20, 150, "Objective: Make Enemy = 3", {font: "20px Arial", fill: "red"});
+    this.add.text(260, 330, "Click to", {font: "10px Arial", fill: "white"});
+    this.add.text(260, 350, "Place Tower", {font: "10px Arial", fill: "white"});
+
+    this.enemyObjectLabel = this.add.bitmapText(185, 250, "pixelFont", 'Enemy = ', 36);
 
 
     /*Enemy*/
     //spawn
-    this.enemyObject0= new EnemyObject(this, 352, -190, "enemy0");
+    this.enemyObject0= new EnemyObject(this, 352, -460, "enemy0");
     this.enemyObject = new EnemyObject(this, 352, -10, "enemy1");
-    this.enemyObject2= new EnemyObject(this, 352, -70, "enemy2");
-    this.enemyObject3 = new EnemyObject(this, 352, -130, "enemy3");
+    this.enemyObject2= new EnemyObject(this, 352, -160, "enemy2");
+    this.enemyObject3 = new EnemyObject(this, 352, -310, "enemy3");
     
     this.enemyObject0.setScale(0.40);
     this.enemyObject.setScale(0.40);
@@ -170,7 +174,7 @@ export default class MainScene extends Phaser.Scene {
 
   /* Enemy Update Functions */
   moveEnemy(){
-    this.enemies.incY(1);
+    this.enemies.incY(0.75);
   }
 
   respawnEnemy(){
@@ -243,11 +247,7 @@ export default class MainScene extends Phaser.Scene {
 
 
   towerAdd(tower, enemy) {
-      
-    
-    this.enemyObject.setActive(false);
 
-    var recentValue;
     //Check for Number 0 object and changes it
     // if(enemy == this.enemyObject0){
     //   this.enemyObjectValue = this.towerValue + this.enemyObject0.data.get('value');
@@ -259,68 +259,87 @@ export default class MainScene extends Phaser.Scene {
     //   //destroy old number
     //   this.enemyObject0.destroy();
     // }
-    //Check for Number 1 object and changes it
-    if(enemy == this.enemyObject){
-      this.enemyObjectValue = this.towerValue + this.enemyObject.data.get('value');
+    //Check for Number 0 object and changes it
+    if(enemy == this.enemyObject0){
+      this.enemyObjectValue = this.towerValue + this.enemyObject0.data.get('value');
 
-      var key = this.enemyObjectValue.toString();
-      
-        //call to make new number
-        this.enemyChange(enemy.x, enemy.y, this.data.get("1"), key);
+      if(this.enemyObjectValue == 3) {
 
-        //update "Enemy" value (right now adds the differnce between old and new numbers)
-        recentValue = this.towerValue + 1;
-        this.enemyObjectLabel = this.add.bitmapText(100, 100, "pixelFont", 'Enemy: ' + recentValue, 36);
-  
-        //destroy old number
-        this.enemyObject.destroy();
-
-
-      // if(this.enemyObjectValue == 3) {
-      //   var key = this.enemyObjectValue.toString();
-      
-      //   //call to make new number
-      //   this.enemyChange(enemy.x, enemy.y, this.data.get("1"), key);
-
-      //   //update "Enemy" value (right now adds the differnce between old and new numbers)
-      //   recentValue = this.towerValue + 1;
-      //   this.enemyObjectLabel = this.add.bitmapText(100, 100, "pixelFont", 'Enemy: ' + recentValue, 36);
-  
-      //   //destroy old number
-      //   this.enemyObject.destroy();
-
-      // }
-
-        
-        
-    }
-
-    //Check for Number 2 object and changes it
-    else if(enemy == this.enemyObject2){
-      this.enemyObjectValue = this.towerValue + this.enemyObject2.data.get('value');
-
-
-
-
+        this.enemyObject0.setActive(false);
 
         var key = this.enemyObjectValue.toString();
       
         //call to make new number
-        this.enemyChange(enemy.x, enemy.y, this.data.get("2"), key);
-        
-        //update "Enemy" value 
-        recentValue = this.towerValue + 2;
-        this.enemyObjectLabel = this.add.bitmapText(100, 100, "pixelFont", 'Enemy: ' + recentValue, 36);
-
+        this.enemyChange(enemy.x, enemy.y, this.data.get("0"), key);
   
         //destroy old number
-        this.enemyObject2.destroy();
-      
+        this.enemyObject0.destroy();
+
+      }
+       
+    }
+
+    //Check for Number 1 object and changes it
+    else if(enemy == this.enemyObject){
+   
+      this.enemyObjectValue = this.towerValue + this.enemyObject.data.get('value');
+
+        if(this.enemyObjectValue == 3) {
+
+          this.enemyObject.setActive(false);
+          var key = this.enemyObjectValue.toString();
+        
+          //call to make new number
+          this.enemyChange(enemy.x, enemy.y, this.data.get("1"), key);
+
+    
+          //destroy old number
+          this.enemyObject.destroy();
+        }
       
     }
 
+    //Check for Number 2 object and changes it
+    else if(enemy == this.enemyObject2){
+   
+      this.enemyObjectValue = this.towerValue + this.enemyObject2.data.get('value');
+
+        if(this.enemyObjectValue == 3) {
+
+          this.enemyObject2.setActive(false);
+          var key = this.enemyObjectValue.toString();
+        
+          //call to make new number
+          this.enemyChange(enemy.x, enemy.y, this.data.get("2"), key);
     
-  
+          //destroy old number
+          this.enemyObject2.destroy();
+        }
+      
+    }
+
+    //Check for Number 3 object and changes it
+    else if(enemy == this.enemyObject3){
+   
+      this.enemyObjectValue = this.towerValue + this.enemyObject3.data.get('value');
+
+        if(this.enemyObjectValue == 3) {
+
+          this.enemyObject3.setActive(false);
+          var key = this.enemyObjectValue.toString();
+        
+          //call to make new number
+          this.enemyChange(enemy.x, enemy.y, this.data.get("3"), key);
+    
+          //destroy old number
+          this.enemyObject3.destroy();
+        }
+      
+    }
+
+    //update "Enemy" value (right now adds the differnce between old and new numbers)
+    this.enemyObjectLabel.setText('Enemy = ' + this.enemyObjectValue);
+
   }
 
   //Creates new nubmer object

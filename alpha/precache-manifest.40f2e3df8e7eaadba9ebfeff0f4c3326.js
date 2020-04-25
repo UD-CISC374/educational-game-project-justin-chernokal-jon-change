@@ -144,15 +144,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/alphafavicon.ico"
   },
   {
-    "revision": "c3c1451f11a44b4a5ec5",
-    "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.main.9a48543900171d89e714.bundle.js"
+    "revision": "b9cee957cf58c2288663",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.main.33e42ee00c8c436e0ff5.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "1f5e1caf079c5acedc0f7386bcfe5bab",
+    "revision": "2e5bfc5244cc0ea6e337393282739c0c",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaindex.html"
   },
   {

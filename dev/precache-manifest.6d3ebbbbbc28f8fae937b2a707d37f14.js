@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/font/font.png"
   },
   {
-    "revision": "38c02ad8ccaf9579150bb10d283e2b0c",
+    "revision": "872f41e77eae3bfc4fba291b0145b12a",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/font/font.xml"
   },
   {
@@ -32,6 +32,46 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/icons/icons8-game-controller-16.png"
   },
   {
+    "revision": "fcaca86a39c7e1f5fb384a65028c5ff7",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/0.png"
+  },
+  {
+    "revision": "cac5e0adbc3e7ee09f7f186bfbb639e0",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/1.png"
+  },
+  {
+    "revision": "6ca5e01f9555b37ce0bc9177c42eaae0",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/2.png"
+  },
+  {
+    "revision": "675f49d7164d9c154f13bd37d21b112e",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/3.png"
+  },
+  {
+    "revision": "d7807eb6396a327df7666db8c2b837e4",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/4.png"
+  },
+  {
+    "revision": "b91e60c071dfdbac6ef976a390fe6297",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/5.png"
+  },
+  {
+    "revision": "62caa29bcf7504363cdf2b1e6540c680",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/6.png"
+  },
+  {
+    "revision": "b282a668b698451a1263ee853fa554e0",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/7.png"
+  },
+  {
+    "revision": "22b37f1843f529b092f0bb77e0cbffd4",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/8.png"
+  },
+  {
+    "revision": "a4abfaadecefdd2f8aa92650278fd5d8",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/9.png"
+  },
+  {
     "revision": "5f1cd6a3703db3c6f96c21f655682062",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/back.62.png"
   },
@@ -52,8 +92,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/foreground.png"
   },
   {
+    "revision": "637b8f1404997bc9bf66880cafa54712",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/i.png"
+  },
+  {
     "revision": "474d9e205df9e69cfa5a2b3183023165",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/midground.png"
+  },
+  {
+    "revision": "9c3ab0e184031e688858f468699c8611",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/z.png"
   },
   {
     "revision": "6be3462bcaa4a183b678800bb66d176c",
@@ -96,15 +144,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devfavicon.ico"
   },
   {
-    "revision": "1b2866209b1dc1e27856",
-    "url": "/educational-game-project-justin-chernokal-jon-change/devgen.main.9aeea792b535f7171081.bundle.js"
+    "revision": "baf904e45f5e8041c184",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devgen.main.3f1c18ca5f54a02b4df2.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/devgen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "282de61fc5559bfbc8a9c9dbdc652cb2",
+    "revision": "0c8183ac7c4558452e09de6a523e9b2f",
     "url": "/educational-game-project-justin-chernokal-jon-change/devindex.html"
   },
   {

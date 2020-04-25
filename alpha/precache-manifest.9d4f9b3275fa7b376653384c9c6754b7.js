@@ -36,6 +36,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/images/0.png"
   },
   {
+    "revision": "cac5e0adbc3e7ee09f7f186bfbb639e0",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/images/1.png"
+  },
+  {
+    "revision": "6ca5e01f9555b37ce0bc9177c42eaae0",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/images/2.png"
+  },
+  {
     "revision": "675f49d7164d9c154f13bd37d21b112e",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaassets/images/3.png"
   },
@@ -136,15 +144,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/alphafavicon.ico"
   },
   {
-    "revision": "9d1af92afa53fb9412f7",
-    "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.main.9276ca71e87feb5e66f4.bundle.js"
+    "revision": "c3c1451f11a44b4a5ec5",
+    "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.main.9a48543900171d89e714.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphagen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "e410e7bad0c516bfbbe2b5b0f979e563",
+    "revision": "1f5e1caf079c5acedc0f7386bcfe5bab",
     "url": "/educational-game-project-justin-chernokal-jon-change/alphaindex.html"
   },
   {

@@ -15,12 +15,12 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     });
 
-    this.load.spritesheet("enemy1", "./assets/images/i.png",{
+    this.load.spritesheet("enemy1", "./assets/images/1.png",{
       frameWidth: 64,
       frameHeight: 64
     });
 
-    this.load.spritesheet("enemy2", "./assets/images/z.png",{
+    this.load.spritesheet("enemy2", "./assets/images/2.png",{
       frameWidth: 64,
       frameHeight: 64
     });

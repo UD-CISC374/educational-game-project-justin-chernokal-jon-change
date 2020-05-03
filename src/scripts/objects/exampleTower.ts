@@ -1,3 +1,5 @@
+import { GameObjects } from "phaser";
+
 export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
     constructor(scene,i,j,map) {
 
@@ -6,6 +8,13 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
         
         
         super(scene,x,y,"exampleTower");
+        /*this.setInteractive();
+        scene.input.setDraggable(this);
+        scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+        })
+        */
 
         scene.textTowerLabel = scene.add.bitmapText(x - 100, y-20, "pixelFont", scene.towerValue, 36);
 
@@ -19,12 +28,19 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
         .setInteractive()
         .on('pointerdown', () => {
             scene.towerValueDown();
-        });
+        })
+        
         
         scene.physics.add.sprite(x,y,"exampleTower");
+
+        // .on('drag', () => {
+        //     scene.doDrag();
+        // });
         //scene.add.existing(this);
        
     }
+
+    
 
     
     // updateTowerValue(scene) {

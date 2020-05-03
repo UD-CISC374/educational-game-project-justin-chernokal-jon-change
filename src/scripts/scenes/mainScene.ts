@@ -27,6 +27,8 @@ export default class MainScene extends Phaser.Scene {
   enemyObjectLabel;
   enemyObjectValue = 1;
 
+  dragObj;
+
 
 
 
@@ -138,7 +140,21 @@ export default class MainScene extends Phaser.Scene {
     },
     this);
     
-    console.log(this.enemies.getFirst());
+    //console.log(this.enemies.getFirst());
+
+    /*TEMP CODE */
+    var tower1 = this.add.sprite(300,300,"exampleTower").setInteractive();
+    tower1.on('pointerover', () => {
+      tower1.setTint(0x00ff00);
+    });
+    this.input.setDraggable(tower1);
+    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+
+  });
+ 
 
   }
 

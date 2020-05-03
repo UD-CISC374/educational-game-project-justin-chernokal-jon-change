@@ -1,6 +1,9 @@
 export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
     constructor(scene,i,j,map) {
 
+        var towerButtonUp;
+        var towerButtonDown;
+
         var x = j * 64 + 64;
         var y = i * 64 + 32;
         
@@ -9,18 +12,23 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
 
         scene.textTowerLabel = scene.add.bitmapText(x - 100, y-20, "pixelFont", scene.towerValue, 36);
 
-        scene.towerButtonUp = scene.add.text(x-120, y - 40, "MORE", {fill:'#0f0'})
+        towerButtonUp = scene.add.text(x-78, y - 50, "<", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
             scene.towerValueUp();
         });
 
-        scene.towerButtonDown = scene.add.text(x-120, y + 20, "LESS", {fill:'#0f0'})
+        towerButtonUp.angle = 90;
+
+        towerButtonDown = scene.add.text(x-77, y + 10, ">", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
             scene.towerValueDown();
         });
         
+        
+        towerButtonDown.angle = 90;
+
         scene.physics.add.sprite(x,y,"exampleTower");
         //scene.add.existing(this);
        

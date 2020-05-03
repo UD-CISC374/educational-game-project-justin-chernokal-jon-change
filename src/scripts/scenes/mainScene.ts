@@ -21,8 +21,7 @@ export default class MainScene extends Phaser.Scene {
 
   textTowerLabel;
   towerValue = 1;
-  towerButtonUp;
-  towerButtonDown;
+  
 
   enemyObjectLabel;
   enemyObjectValue = 1;
@@ -202,6 +201,7 @@ export default class MainScene extends Phaser.Scene {
   endScene(){
     if (this.enemies.getTotalUsed() == 0){
 
+      this.map[5][4] = 0;
       this.scene.start('MainScene');
     }
   }
@@ -260,9 +260,10 @@ export default class MainScene extends Phaser.Scene {
   towerAdd(tower, enemy) {
 
     if(enemy.data.get("collide") ==  "true"){
-      if(this.towerValue != 0){
-      
+
       let eo: EnemyObject = enemy as EnemyObject; 
+
+      if(this.towerValue != 0){
       
       enemy.setActive(false);
 
@@ -277,7 +278,11 @@ export default class MainScene extends Phaser.Scene {
     
 
       //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemyObjectLabel = this.add.bitmapText(100, 100, "pixelFont", 'Enemy: ' + this.towerValue, 36);
+      this.enemyObjectLabel.setText('Enemy = ' + key, 36);
+      }
+
+      if(this.towerValue == 0) {
+        this.enemyObjectLabel.setText('Enemy = ' + eo.data.get('value'), 36);
       }
     }     
   }

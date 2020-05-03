@@ -107,26 +107,23 @@ export default class MainScene extends Phaser.Scene {
     this.enemyObject2= new EnemyObject(this, 352, -160, "enemy2");
     this.enemyObject3 = new EnemyObject(this, 352, -310, "enemy3");
     
-    this.enemyObject0.setScale(0.40);
-    this.enemyObject.setScale(0.40);
-    this.enemyObject2.setScale(0.40);
-    this.enemyObject3.setScale(0.40);
     
     this.enemies = this.physics.add.group();
     this.enemies.add(this.enemyObject0);
     this.enemies.add(this.enemyObject);
     this.enemies.add(this.enemyObject2);
     this.enemies.add(this.enemyObject3); 
+    this.enemyObject.data.set("value", 1);
+    this.enemyObject2.data.set("value", 2);
+    this.enemyObject3.data.set("value", 3);
+    this.enemyObject0.data.set("value",0);
 
-    this.enemyObject0.setDataEnabled();
-    this.enemyObject.setDataEnabled();
-    this.enemyObject2.setDataEnabled();
-    this.enemyObject3.setDataEnabled();
 
-    this.enemyObject0.data.set('value', 0);
-    this.enemyObject.data.set('value', 1);
-    this.enemyObject2.data.set('value', 2);
-    this.enemyObject3.data.set('value', 3);
+    //Number tower Collision
+    this.enemyObject.data.set("collide", "true");
+    this.enemyObject2.data.set("collide", "true");
+    this.enemyObject3.data.set("collide", "false");
+    this.enemyObject0.data.set("collide", "true");
 
 
     /* Tower Group */
@@ -146,7 +143,9 @@ export default class MainScene extends Phaser.Scene {
   update() {
 
     this.moveEnemy();
+    this.killEnemy3();
     this.respawnEnemy();
+    this.endScene();
 
     if (this.game.input.activePointer.isDown) {
       this.placeTower();
@@ -174,28 +173,40 @@ export default class MainScene extends Phaser.Scene {
 
   /* Enemy Update Functions */
   moveEnemy(){
-    this.enemies.incY(0.75);
+    this.enemies.incY(1);
+  }
+
+  killEnemy3(){
+    for(let enemy of this.enemies.getChildren()){
+      if ( (enemy as EnemyObject).y >= this.scale.height){
+        if( (enemy as EnemyObject).data.get("value") == 3  ){
+          (enemy as EnemyObject).setActive(false);
+          (enemy as EnemyObject).destroy();
+        }  
+      }
+    }
   }
 
   respawnEnemy(){
 
     
-    if (this.enemyObject.y > 546){
-      this.enemyObject.y = -32;
-    }
-  
-    if (this.enemyObject2.y > 546){
-      this.enemyObject2.y = -32;
-    }
-
-    if (this.enemyObject3.y > 546){
-      this.enemyObject3.y = -32;
-    }
-  
-    if (this.enemyObject0.y > 546){
-      this.enemyObject0.y = -32;
+    for(let enemy of this.enemies.getChildren()){
+      if ( (enemy as EnemyObject).y >= this.scale.height){
+          (enemy as EnemyObject).y = -32 
+          enemy.data.set("collide", "true");
+      }
     }
   }
+
+
+  endScene(){
+    if (this.enemies.getTotalUsed() == 0){
+
+      this.scene.start('MainScene');
+    }
+  }
+
+
 
   /* Tower Interaction */
   placeTower() {
@@ -248,106 +259,38 @@ export default class MainScene extends Phaser.Scene {
 
   towerAdd(tower, enemy) {
 
-    //Check for Number 0 object and changes it
-    // if(enemy == this.enemyObject0){
-    //   this.enemyObjectValue = this.towerValue + this.enemyObject0.data.get('value');
-    //   var key = this.enemyObjectValue.toString();
+    if(enemy.data.get("collide") ==  "true"){
+      if(this.towerValue != 0){
       
-    //   //call to make new number
-    //   this.enemyChange(enemy.x, enemy.y, this.data.get("enemy0"), key);
-
-    //   //destroy old number
-    //   this.enemyObject0.destroy();
-    // }
-    //Check for Number 0 object and changes it
-    if(enemy == this.enemyObject0){
-      this.enemyObjectValue = this.towerValue + this.enemyObject0.data.get('value');
-
-      if(this.enemyObjectValue == 3) {
-
-        this.enemyObject0.setActive(false);
-
-        var key = this.enemyObjectValue.toString();
+      let eo: EnemyObject = enemy as EnemyObject; 
       
-        //call to make new number
-        this.enemyChange(enemy.x, enemy.y, this.data.get("0"), key);
-  
-        //destroy old number
-        this.enemyObject0.destroy();
+      enemy.setActive(false);
 
+      let enemyObjectValue = this.towerValue + eo.data.get('value');
+      var key = enemyObjectValue.toString();
+      
+      //call to make new number
+      this.enemyChange(eo.x, eo.y, eo.data.get('value'), key);
+
+      //destroy old number
+      enemy.destroy();
+    
+
+      //update "Enemy" value (right now adds the differnce between old and new numbers)
+      this.enemyObjectLabel = this.add.bitmapText(100, 100, "pixelFont", 'Enemy: ' + this.towerValue, 36);
       }
-       
-    }
-
-    //Check for Number 1 object and changes it
-    else if(enemy == this.enemyObject){
-   
-      this.enemyObjectValue = this.towerValue + this.enemyObject.data.get('value');
-
-        if(this.enemyObjectValue == 3) {
-
-          this.enemyObject.setActive(false);
-          var key = this.enemyObjectValue.toString();
-        
-          //call to make new number
-          this.enemyChange(enemy.x, enemy.y, this.data.get("1"), key);
-
-    
-          //destroy old number
-          this.enemyObject.destroy();
-        }
-      
-    }
-
-    //Check for Number 2 object and changes it
-    else if(enemy == this.enemyObject2){
-   
-      this.enemyObjectValue = this.towerValue + this.enemyObject2.data.get('value');
-
-        if(this.enemyObjectValue == 3) {
-
-          this.enemyObject2.setActive(false);
-          var key = this.enemyObjectValue.toString();
-        
-          //call to make new number
-          this.enemyChange(enemy.x, enemy.y, this.data.get("2"), key);
-    
-          //destroy old number
-          this.enemyObject2.destroy();
-        }
-      
-    }
-
-    //Check for Number 3 object and changes it
-    else if(enemy == this.enemyObject3){
-   
-      this.enemyObjectValue = this.towerValue + this.enemyObject3.data.get('value');
-
-        if(this.enemyObjectValue == 3) {
-
-          this.enemyObject3.setActive(false);
-          var key = this.enemyObjectValue.toString();
-        
-          //call to make new number
-          this.enemyChange(enemy.x, enemy.y, this.data.get("3"), key);
-    
-          //destroy old number
-          this.enemyObject3.destroy();
-        }
-      
-    }
-
-    //update "Enemy" value (right now adds the differnce between old and new numbers)
-    this.enemyObjectLabel.setText('Enemy = ' + this.enemyObjectValue);
-
+    }     
   }
+
 
   //Creates new nubmer object
   enemyChange(posX, posY, currVal, key){
+    var numNew = (this.towerValue + currVal);
 
-    var numNew = (this.towerValue + key);
-
-    this.enemies.create(posX, posY + 60, this.data.get(key)).setScale(0.40);
+    let newEnemy: EnemyObject = new EnemyObject(this, posX, posY, this.data.get(key)); 
+    this.enemies.add(newEnemy);
+    newEnemy.data.set("value", numNew);
+    newEnemy.data.set("collide", "false");
   }
 
 }

@@ -5,6 +5,7 @@ export default class EnemyObject extends Phaser.Physics.Arcade.Sprite {
 
         
         scene.add.existing(this);
+        this.setDataEnabled();
     }
 
 }

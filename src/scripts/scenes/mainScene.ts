@@ -142,9 +142,12 @@ export default class MainScene extends Phaser.Scene {
     //console.log(this.enemies.getFirst());
 
     /*DRAG TEMP CODE */
-    var tower1 = this.add.sprite(300,300,"exampleTower").setInteractive();
+    var tower1 = this.add.sprite(576,32,"exampleTower").setInteractive();
     tower1.on('pointerover', () => {
-      tower1.setTint(0x00ff00);
+      tower1.setTint(0x00fffa);
+    });
+    tower1.on('pointerout', () => {
+      tower1.clearTint()
     });
     this.input.setDraggable(tower1);
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {

@@ -39,6 +39,7 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
 
         
         
+          
         
         scene.physics.add.sprite(x,y,"exampleTower");
 

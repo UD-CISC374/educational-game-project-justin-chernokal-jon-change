@@ -4,7 +4,14 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet("exampleTower", "./assets/spritesheets/tower_add.png", {
+    this.load.image("menuBackground", "./assets/images/menuBackground.png");
+    this.load.image("startButton", "./assets/images/startButton.png");
+
+    this.load.spritesheet("addTower", "./assets/spritesheets/tower_add.png", {
+      frameWidth: 128,
+      frameHeight: 64
+    });
+    this.load.spritesheet("subTower", "./assets/spritesheets/tower_sub.png", {
       frameWidth: 128,
       frameHeight: 64
     });
@@ -67,6 +74,6 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('MainScene');
+    this.scene.start('StartScene');
   }
 }

@@ -1,6 +1,6 @@
 import { GameObjects } from "phaser";
 
-export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
+export default class towerSubtract extends Phaser.Physics.Arcade.Sprite {
     constructor(scene,i,j,map) {
 
         var towerButtonUp;
@@ -10,7 +10,7 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
         var y = i * 64 + 32;
         
         
-        super(scene,x,y,"exampleTower");
+        super(scene,x,y,"towerSubtract");
         /*this.setInteractive();
         scene.input.setDraggable(this);
         scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
@@ -24,7 +24,7 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
         towerButtonUp = scene.add.text(x-78, y - 50, "<", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
-            scene.towerAddValueUp();
+            scene.towerSubValueUp();
         });
 
         towerButtonUp.angle = 90;
@@ -32,15 +32,13 @@ export default class ExampleTower extends Phaser.Physics.Arcade.Sprite {
         towerButtonDown = scene.add.text(x-77, y + 10, ">", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
-            scene.towerAddValueDown();
-        });
+            scene.towerSubValueDown();
+        })
 
-        towerButtonDown.angle = 90;
-
+         towerButtonDown.angle = 90;
         
         
-        
-        scene.physics.add.sprite(x,y,"exampleTower");
+        scene.physics.add.sprite(x,y,"towerSubtract");
 
         // .on('drag', () => {
         //     scene.doDrag();

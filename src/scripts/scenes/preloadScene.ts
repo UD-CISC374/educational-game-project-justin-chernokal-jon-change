@@ -9,6 +9,11 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     });
 
+    this.load.spritesheet("towerSubtract", "./assets/spritesheets/tower_sub.png", {
+      frameWidth: 128,
+      frameHeight: 64
+    });
+
     /* NUMBER IMAGES */
     this.load.spritesheet('enemy0', "./assets/images/0.png",{
       frameWidth: 64,

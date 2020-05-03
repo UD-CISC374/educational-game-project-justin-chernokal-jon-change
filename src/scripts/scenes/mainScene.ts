@@ -21,8 +21,7 @@ export default class MainScene extends Phaser.Scene {
 
   textTowerLabel;
   towerValue = 1;
-  towerButtonUp;
-  towerButtonDown;
+  
 
   enemyObjectLabel;
   enemyObjectValue = 1;
@@ -142,18 +141,16 @@ export default class MainScene extends Phaser.Scene {
     
     //console.log(this.enemies.getFirst());
 
-    /*TEMP CODE */
+    /*DRAG TEMP CODE */
     var tower1 = this.add.sprite(300,300,"exampleTower").setInteractive();
     tower1.on('pointerover', () => {
       tower1.setTint(0x00ff00);
     });
     this.input.setDraggable(tower1);
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-
       gameObject.x = dragX;
       gameObject.y = dragY;
-
-  });
+    });
  
 
   }
@@ -241,7 +238,7 @@ export default class MainScene extends Phaser.Scene {
     
   }
 
-  towerValueUp() {
+  towerAddValueUp() {
     if(this.towerValue >= 3) {
       this.towerValue = 3;
     }
@@ -251,7 +248,7 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  towerValueDown() {
+  towerAddValueDown() {
     if(this.towerValue <= 0) {
       this.towerValue = 0;
     }

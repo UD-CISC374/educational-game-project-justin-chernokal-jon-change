@@ -96,8 +96,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/i.png"
   },
   {
+    "revision": "4204c1b5f5179909afc6cf502b53447c",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/menuBackground.png"
+  },
+  {
     "revision": "474d9e205df9e69cfa5a2b3183023165",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/midground.png"
+  },
+  {
+    "revision": "1d5439949d44a38127549cc3641277e4",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/images/startButton.png"
   },
   {
     "revision": "9c3ab0e184031e688858f468699c8611",
@@ -132,8 +140,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/spritesheets/ship3.png"
   },
   {
-    "revision": "a87cb4644c37aee620a0307439bc04fe",
+    "revision": "7d4f76def698eca4b398394b5758d4c4",
     "url": "/educational-game-project-justin-chernokal-jon-change/devassets/spritesheets/tower_add.png"
+  },
+  {
+    "revision": "a0af1af21a91325bd367480aa731d6ba",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devassets/spritesheets/tower_sub.png"
   },
   {
     "revision": "4befcfd3ed56b3a01365a4f4ae3901f1",
@@ -144,15 +156,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/devfavicon.ico"
   },
   {
-    "revision": "eaedb72e7d48c5f3c889",
-    "url": "/educational-game-project-justin-chernokal-jon-change/devgen.main.e2be90346f9cbdd3f1cb.bundle.js"
+    "revision": "0d16d0bfe028291d62cb",
+    "url": "/educational-game-project-justin-chernokal-jon-change/devgen.main.a13d1f39776ab2288321.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/devgen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "74fa82577f11fb2fec5f60a1199f4b39",
+    "revision": "11af8d51584d8b57fbe1d2f01acbb4ae",
     "url": "/educational-game-project-justin-chernokal-jon-change/devindex.html"
   },
   {

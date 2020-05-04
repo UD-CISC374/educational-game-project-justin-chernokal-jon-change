@@ -156,15 +156,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/betafavicon.ico"
   },
   {
-    "revision": "31c4e638f30c5dc7be0f",
-    "url": "/educational-game-project-justin-chernokal-jon-change/betagen.main.db8eeef11e04caa0a635.bundle.js"
+    "revision": "59d6002dc5ecc6540239",
+    "url": "/educational-game-project-justin-chernokal-jon-change/betagen.main.20f251013bf72579737a.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/betagen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "ef1bd9f75cea6df2beed002c977acd8d",
+    "revision": "06c2d6f1f2c1452c401a8bfdfa2b3e7b",
     "url": "/educational-game-project-justin-chernokal-jon-change/betaindex.html"
   },
   {

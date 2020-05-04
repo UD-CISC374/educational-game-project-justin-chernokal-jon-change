@@ -9,7 +9,10 @@ export default class MainScene extends Phaser.Scene {
   enemyObject2: Phaser.Physics.Arcade.Sprite;
   enemyObject3: Phaser.Physics.Arcade.Sprite;
   enemyObject0: Phaser.Physics.Arcade.Sprite;
-
+  enemyObject4: Phaser.Physics.Arcade.Sprite;
+  enemyObject5: Phaser.Physics.Arcade.Sprite;
+  enemyObject6: Phaser.Physics.Arcade.Sprite;
+  enemyObject7: Phaser.Physics.Arcade.Sprite;
   data: Phaser.Data.DataManager;
 
   addTower: Phaser.Physics.Arcade.Sprite;
@@ -32,7 +35,11 @@ export default class MainScene extends Phaser.Scene {
 
   enemyAddLabel;
   enemySubLabel;
-  enemyObjectValue = 1;
+  enemyObjectValue = 0;
+  enemyValueSub = 0;
+
+  scoreLabel;
+  score = 0;
 
 
 
@@ -64,6 +71,10 @@ export default class MainScene extends Phaser.Scene {
     this.data.set('1', 'enemy1');
     this.data.set('2', 'enemy2');
     this.data.set('3', 'enemy3');
+    this.data.set('4', 'enemy4');
+    this.data.set('5', 'enemy5');
+    this.data.set('6', 'enemy6');
+    this.data.set('7', 'enemy7');
 
 
     /* PATH */
@@ -101,8 +112,15 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(20, 70, 'Change the tower value by clicking', {font: "15px Arial", fill: "white"});
     this.add.text(20, 85, '"MORE" and "LESS".', {font: "15px Arial", fill: "white"});
     this.add.text(20, 150, "Objective: Make Enemy = 3", {font: "20px Arial", fill: "red"});
-    this.add.text(260, 330, "Click to", {font: "10px Arial", fill: "white"});
-    this.add.text(260, 350, "Place Tower", {font: "10px Arial", fill: "white"});
+    this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
+    this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
+    this.add.text(260, 394, "Click For", {font: "10px Arial", fill: "white"});
+    this.add.text(260, 414, "Subtraction", {font: "10px Arial", fill: "white"});
+
+    this.add.text(120, 460, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
+
+    this.scoreLabel = this.add.bitmapText(200, 460, "pixelFont", '', 30);
+    this.scoreLabel.setText(this.score, 54);
 
     this.enemyAddLabel = this.add.bitmapText(400, 215, "pixelFont", ' = ', 36);
     this.enemySubLabel = this.add.bitmapText(400, 400, "pixelFont", ' = ', 36);
@@ -122,11 +140,18 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.add(this.enemyObject);
     this.enemies.add(this.enemyObject2);
     this.enemies.add(this.enemyObject3); 
+    // this.enemies.add(this.enemyObject4);
+    // this.enemies.add(this.enemyObject5);
+    // this.enemies.add(this.enemyObject6);
+    // this.enemies.add(this.enemyObject7); 
     this.enemyObject.data.set("value", 1);
     this.enemyObject2.data.set("value", 2);
     this.enemyObject3.data.set("value", 3);
-    this.enemyObject0.data.set("value",0);
-
+    this.enemyObject0.data.set("value", 0);
+    // this.enemyObject4.data.set("value", 4);
+    // this.enemyObject5.data.set("value", 5);
+    // this.enemyObject6.data.set("value", 6);
+    // this.enemyObject7.data.set("value", 7);
 
     //Number tower Collision - Add
     this.enemyObject.data.set("collideAdd", "true");
@@ -206,6 +231,8 @@ export default class MainScene extends Phaser.Scene {
         if( (enemy as EnemyObject).data.get("value") == 3  ){
           (enemy as EnemyObject).setActive(false);
           (enemy as EnemyObject).destroy();
+          this.score++;
+          this.scoreLabel.setText(this.score, 36);
         }  
       }
     }
@@ -217,7 +244,8 @@ export default class MainScene extends Phaser.Scene {
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).y >= this.scale.height){
           (enemy as EnemyObject).y = -32 
-          enemy.data.set("collide", "true");
+          enemy.data.set("collideAdd", "true");
+          enemy.data.set("collideSub", "true");
       }
     }
   }
@@ -330,7 +358,7 @@ export default class MainScene extends Phaser.Scene {
       
       enemy.setActive(false);
 
-      let enemyObjectValue = this.towerAddValue + eo.data.get('value');
+      let enemyObjectValue = eo.data.get('value') + this.towerAddValue ;
       var key = enemyObjectValue.toString();
       
       //call to make new number
@@ -341,7 +369,7 @@ export default class MainScene extends Phaser.Scene {
     
 
       //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemyAddLabel.setText(' = ' + key, 36);
+      this.enemyAddLabel.setText(' = ' + enemyObjectValue, 36);
       }
 
       if(this.towerAddValue == 0) {
@@ -360,8 +388,8 @@ export default class MainScene extends Phaser.Scene {
       
       enemy.setActive(false);
 
-      let enemyObjectValue = eo.data.get('value') - this.towerSubValue;
-      var key = enemyObjectValue.toString();
+      let enemyValueSub = eo.data.get('value') - this.towerSubValue;
+      var key = enemyValueSub.toString();
       
       //call to make new number
       this.enemyChangeSub(eo.x, eo.y, eo.data.get('value'), key);
@@ -371,7 +399,7 @@ export default class MainScene extends Phaser.Scene {
     
 
       //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemySubLabel.setText(' = ' + key, 36);
+      this.enemySubLabel.setText(' = ' + enemyValueSub, 36);
       }
 
       if(this.towerSubValue == 0) {
@@ -395,7 +423,7 @@ export default class MainScene extends Phaser.Scene {
 
   //Creates new nubmer object subtraction
   enemyChangeSub(posX, posY, currVal, key){
-    var numNew = (this.towerSubValue + currVal);
+    var numNew = (currVal - this.towerSubValue);
 
     let newEnemy: EnemyObject = new EnemyObject(this, posX, posY, this.data.get(key)); 
     this.enemies.add(newEnemy);

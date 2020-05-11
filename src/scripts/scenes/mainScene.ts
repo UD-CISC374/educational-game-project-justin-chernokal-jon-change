@@ -134,7 +134,7 @@ export default class MainScene extends Phaser.Scene {
     this.enemyObject3 = new EnemyObject(this, 352, -310, "enemy3");
    
     
-    
+    //add created enemies to group
     this.enemies = this.physics.add.group();
     this.enemies.add(this.enemyObject0);
     this.enemies.add(this.enemyObject);
@@ -144,6 +144,8 @@ export default class MainScene extends Phaser.Scene {
     // this.enemies.add(this.enemyObject5);
     // this.enemies.add(this.enemyObject6);
     // this.enemies.add(this.enemyObject7); 
+
+    //Give enemies reference values
     this.enemyObject.data.set("value", 1);
     this.enemyObject2.data.set("value", 2);
     this.enemyObject3.data.set("value", 3);
@@ -222,10 +224,12 @@ export default class MainScene extends Phaser.Scene {
 
   /* Enemy Update Functions */
   moveEnemy(){
+    //moves enemy one down
     this.enemies.incY(1);
   }
 
   killEnemy3(){
+    //kills enemy of value three at bottom of screen
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).y >= this.scale.height){
         if( (enemy as EnemyObject).data.get("value") == 3  ){
@@ -239,7 +243,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   respawnEnemy(){
-
+    //respawn eneimes after passing bottom of screen
     
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).y >= this.scale.height){
@@ -252,6 +256,7 @@ export default class MainScene extends Phaser.Scene {
 
 
   endScene(){
+    //when no enemies remain return to start screen
     if (this.enemies.getTotalUsed() == 0){
 
       this.map[3][4] = 0;
@@ -263,7 +268,9 @@ export default class MainScene extends Phaser.Scene {
 
 
   /* Tower Interaction */
+  
   placeTower() {
+    //Place towers
     var i = Math.floor(this.input.mousePointer.y/64);
     var j = Math.floor(this.input.mousePointer.x/64);
 
@@ -272,7 +279,7 @@ export default class MainScene extends Phaser.Scene {
       var x = j * 64 + 64;
       var y = i * 64 + 32;
 
-      //this.exampleTower = this.physics.add.sprite(0,0,"exampleTower");
+      
       var tower = new AddTower(this,i,j,this.map);
 
       this.towersAdd.add(tower);
@@ -288,7 +295,6 @@ export default class MainScene extends Phaser.Scene {
       var x = j * 64 + 64;
       var y = i * 64 + 32;
 
-      //this.exampleTower = this.physics.add.sprite(0,0,"exampleTower");
       var tower = new SubTower(this,i,j,this.map);
 
       this.towersSub.add(tower);
@@ -297,15 +303,11 @@ export default class MainScene extends Phaser.Scene {
 
       this.towerSubCount += 1;
      
-    }
-
-    //this.physics.add.overlap(this.tower, this.enemyObject, this,)
-
-    
-    
-    
+    }    
   }
 
+  /* Tower Value Manipulation */
+  //Add Tower 
   towerAddValueUp() {
     if(this.towerAddValue >= 3) {
       this.towerAddValue = 3;
@@ -326,6 +328,7 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+  //Sub Tower
   towerSubValueUp() {
     if(this.towerSubValue >= 3) {
       this.towerSubValue = 3;
@@ -347,7 +350,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
 
-
+  /* Enemy & Tower Interaction */
   towerAdd(tower, enemy) {
 
     if(enemy.data.get("collideAdd") ==  "true"){

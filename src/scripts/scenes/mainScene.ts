@@ -44,6 +44,8 @@ export default class MainScene extends Phaser.Scene {
 
   music;
 
+  objective = Phaser.Math.RND.between(-9,9);
+
 
 
 
@@ -141,7 +143,7 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(20, 45, "moving objects.", {font: "15px Arial", fill: "white"});
     this.add.text(20, 70, 'Change the tower value by clicking', {font: "15px Arial", fill: "white"});
     this.add.text(20, 85, '"MORE" and "LESS".', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 150, "Objective: Make Enemy = 3", {font: "20px Arial", fill: "red"});
+    this.add.text(20, 150, "Objective: Make Enemy = " + this.objective, {font: "20px Arial", fill: "red"});
     this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
     this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
     this.add.text(518, 330, "Click For", {font: "10px Arial", fill: "white"});
@@ -161,7 +163,7 @@ export default class MainScene extends Phaser.Scene {
 
     //add and sub labels
     this.enemyAddLabel = this.add.bitmapText(228, 360, "pixelFont", ' x' + ' + ' + 'y' + ' = ' + "?", 36);
-    this.enemySubLabel = this.add.bitmapText(484, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
+    this.enemySubLabel = this.add.bitmapText(474, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
 
 
     /*Enemy*/
@@ -270,7 +272,7 @@ export default class MainScene extends Phaser.Scene {
     //kills enemy of value three at bottom of screen
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).x >= this.scale.width){
-        if( (enemy as EnemyObject).data.get("value") == 3  ){
+        if( (enemy as EnemyObject).data.get("value") == this.objective  ){
           (enemy as EnemyObject).setActive(false);
           (enemy as EnemyObject).destroy();
           this.score++;

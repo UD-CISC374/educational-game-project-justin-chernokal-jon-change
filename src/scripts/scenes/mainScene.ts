@@ -133,8 +133,8 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(20, 150, "Objective: Make Enemy = 3", {font: "20px Arial", fill: "red"});
     this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
     this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
-    this.add.text(260, 394, "Click For", {font: "10px Arial", fill: "white"});
-    this.add.text(260, 414, "Subtraction", {font: "10px Arial", fill: "white"});
+    this.add.text(454, 202, "Click For", {font: "10px Arial", fill: "white"});
+    this.add.text(454, 222, "Subtraction", {font: "10px Arial", fill: "white"});
 
     // correct text
     this.add.text(120, 460, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});

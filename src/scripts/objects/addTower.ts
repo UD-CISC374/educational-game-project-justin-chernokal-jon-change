@@ -10,9 +10,9 @@ export default class AddTower extends Phaser.Physics.Arcade.Sprite {
         
         super(scene,x,y,"addTower");
 
-        scene.textAddTowerLabel = scene.add.bitmapText(x - 100, y-20, "pixelFont", scene.towerAddValue, 36);
+        scene.textAddTowerLabel = scene.add.bitmapText(x - 10, y - 100, "pixelFont", scene.towerAddValue, 50);
 
-        towerButtonUp = scene.add.text(x-78, y - 50, "<", {fill:'#0f0', fontSize: 40})
+        towerButtonUp = scene.add.text(x + 50, y - 100, "<", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
             scene.towerAddValueUp();
@@ -20,7 +20,7 @@ export default class AddTower extends Phaser.Physics.Arcade.Sprite {
 
         towerButtonUp.angle = 90;
 
-        towerButtonDown = scene.add.text(x-77, y + 10, ">", {fill:'#0f0', fontSize: 40})
+        towerButtonDown = scene.add.text(x - 10, y - 100, ">", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
             scene.towerAddValueDown();

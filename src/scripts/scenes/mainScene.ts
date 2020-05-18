@@ -112,7 +112,7 @@ export default class MainScene extends Phaser.Scene {
 
     //sound effects
     this.changeSound1 = this.sound.add("change1");
-    this.changeSound2 = this.sound.add("chnage2");
+    this.changeSound2 = this.sound.add("change2");
 
 
     /* PATH */

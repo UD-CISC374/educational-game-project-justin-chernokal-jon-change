@@ -43,6 +43,8 @@ export default class MainScene extends Phaser.Scene {
   score = 0;
 
   music;
+  changeSound1;
+  changeSound2;
 
   objective = Phaser.Math.RND.between(-9,9);
 
@@ -107,6 +109,10 @@ export default class MainScene extends Phaser.Scene {
     }
 
     this.music.play(musicConfig);
+
+    //sound effects
+    this.changeSound1 = this.sound.add("change1");
+    this.changeSound2 = this.sound.add("chnage2");
 
 
     /* PATH */
@@ -424,6 +430,9 @@ export default class MainScene extends Phaser.Scene {
 
         //destroy old number
         enemy.destroy();
+
+        //Animation
+        enemy.play("change_anim");
         }
       }
     }     
@@ -462,6 +471,9 @@ export default class MainScene extends Phaser.Scene {
 
           //destroy old number
           enemy.destroy();
+
+          //Animation
+          enemy.play("change_anim");
         }
       }     
     }     
@@ -473,6 +485,19 @@ export default class MainScene extends Phaser.Scene {
   enemyChange(posX, posY, currVal, key){
     var numNew = (this.towerAddValue + currVal);
 
+    //sound effect
+    var changeConfig ={
+      mute: false,
+      volume: 3,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: false,
+      delay: 0
+    }
+
+    this.changeSound1.play(changeConfig);
+
     let newEnemy: EnemyObject = new EnemyObject(this, posX, posY, this.data.get(key)); 
     this.enemies.add(newEnemy);
     newEnemy.data.set("value", numNew);
@@ -483,6 +508,19 @@ export default class MainScene extends Phaser.Scene {
   //Creates new nubmer object subtraction
   enemyChangeSub(posX, posY, currVal, key){
     var numNew = (currVal - this.towerSubValue);
+
+    //sound effect
+    var changeConfig ={
+      mute: false,
+      volume: 3,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: false,
+      delay: 0
+    }
+
+    this.changeSound1.play(changeConfig);
 
     let newEnemy: EnemyObject = new EnemyObject(this, posX, posY, this.data.get(key)); 
     this.enemies.add(newEnemy);

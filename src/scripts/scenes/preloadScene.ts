@@ -115,6 +115,19 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     });
 
+    /* Animations */
+    this.load.spritesheet("numChange", "assests/spritesheets/explosion3.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.anims.create({
+      key: "change_anim",
+      frames: this.anims.generateFrameNumbers("numChange", {start: 0, end: 3}),
+      frameRate: 5,
+      repeat: 0
+    });
+
     /* Font */
     this.load.bitmapFont("pixelFont", "./assets/font/font.png", "assets/font/font.xml");
 

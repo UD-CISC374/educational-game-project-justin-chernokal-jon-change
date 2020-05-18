@@ -426,9 +426,6 @@ export default class MainScene extends Phaser.Scene {
         enemy.destroy();
         }
       }
-    
-      
-     
     }     
   }
 

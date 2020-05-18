@@ -36,8 +36,6 @@ export default class AddTower extends Phaser.Physics.Arcade.Sprite {
             scene.towerAddValueDown();
         });
         
-
-
         scene.physics.add.sprite(x,y,"addTower");
         //scene.add.existing(this);
        

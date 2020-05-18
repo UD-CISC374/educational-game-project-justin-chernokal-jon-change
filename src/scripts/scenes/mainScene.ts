@@ -49,14 +49,14 @@ export default class MainScene extends Phaser.Scene {
 
 
   // enemy path = -1; open tower slot = 0; blocked/used tower slot = 1
-  map = [[1,1,1,1,1,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1],
-         [1,1,1,1,0,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1],
-         [1,1,1,1,2,-1,1,1,1,1],
-         [1,1,1,1,1,-1,1,1,1,1]];
+  map = [[1,1,1,1,1,1,1,1,1,1],
+         [1,1,1,1,1,1,1,1,1,1],
+         [1,1,1,1,1,1,1,1,1,1],
+         [1,1,1,1,0,1,1,2,1,1],
+         [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
+         [1,1,1,1,1,1,1,1,1,1],
+         [1,1,1,1,1,1,1,1,1,1],
+         [1,1,1,1,1,1,1,1,1,1]];
   
 
   constructor() {
@@ -185,13 +185,13 @@ export default class MainScene extends Phaser.Scene {
     //Number tower Collision - Add
     this.enemyObject.data.set("collideAdd", "true");
     this.enemyObject2.data.set("collideAdd", "true");
-    this.enemyObject3.data.set("collideAdd", "false");
+    this.enemyObject3.data.set("collideAdd", "true");
     this.enemyObject0.data.set("collideAdd", "true");
 
     //Number tower Collision - Sub
     this.enemyObject.data.set("collideSub", "true");
     this.enemyObject2.data.set("collideSub", "true");
-    this.enemyObject3.data.set("collideSub", "false");
+    this.enemyObject3.data.set("collideSub", "true");
     this.enemyObject0.data.set("collideSub", "true");
 
     /* Tower Group */

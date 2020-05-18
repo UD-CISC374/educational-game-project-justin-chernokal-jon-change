@@ -6,8 +6,8 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
         var towerButtonUp;
         var towerButtonDown;
 
-        var x = j * 64 + 64;
-        var y = i * 64 + 32;
+        var x = j * 64 + 32;
+        var y = i * 64 + 64;
         
         
         super(scene,x,y,"subTower");

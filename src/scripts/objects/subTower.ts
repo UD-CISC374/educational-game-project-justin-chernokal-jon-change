@@ -7,7 +7,7 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
         var towerButtonDown;
 
         var x = j * 64 + 32;
-        var y = i * 64 + 64;
+        var y = i * 64;
         
         
         super(scene,x,y,"subTower");
@@ -19,9 +19,9 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
         })
         */
 
-        scene.textSubTowerLabel = scene.add.bitmapText(x - 10, y - 100, "pixelFont", scene.towerSubValue, 50);
+        scene.textSubTowerLabel = scene.add.bitmapText(x - 5, y + 75, "pixelFont", scene.towerSubValue, 50);
 
-        towerButtonUp = scene.add.text(x + 50, y - 100, "<", {fill:'#0f0', fontSize: 40})
+        towerButtonUp = scene.add.text(x + 50, y + 75, "<", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
             console.log('sub up');
@@ -30,7 +30,7 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
 
         towerButtonUp.angle = 90;
 
-        towerButtonDown = scene.add.text(x - 10, y - 100, ">", {fill:'#0f0', fontSize: 40})
+        towerButtonDown = scene.add.text(x - 10, y + 75, ">", {fill:'#0f0', fontSize: 40})
         .setInteractive()
         .on('pointerdown', () => {
             scene.towerSubValueDown();

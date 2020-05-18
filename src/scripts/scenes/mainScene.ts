@@ -52,9 +52,9 @@ export default class MainScene extends Phaser.Scene {
   map = [[1,1,1,1,1,1,1,1,1,1],
          [1,1,1,1,1,1,1,1,1,1],
          [1,1,1,1,1,1,1,1,1,1],
-         [1,1,1,1,0,1,1,2,1,1],
+         [1,1,1,1,0,1,1,1,1,1],
          [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-         [1,1,1,1,1,1,1,1,1,1],
+         [1,1,1,1,1,1,1,1,2,1],
          [1,1,1,1,1,1,1,1,1,1],
          [1,1,1,1,1,1,1,1,1,1]];
   
@@ -133,8 +133,8 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(20, 150, "Objective: Make Enemy = 3", {font: "20px Arial", fill: "red"});
     this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
     this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
-    this.add.text(454, 202, "Click For", {font: "10px Arial", fill: "white"});
-    this.add.text(454, 222, "Subtraction", {font: "10px Arial", fill: "white"});
+    this.add.text(518, 330, "Click For", {font: "10px Arial", fill: "white"});
+    this.add.text(518, 350, "Subtraction", {font: "10px Arial", fill: "white"});
 
     // correct text
     this.add.text(120, 460, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
@@ -149,8 +149,8 @@ export default class MainScene extends Phaser.Scene {
     this.scoreLabel.setText(this.score, 54);
 
     //add and sub labels
-    this.enemyAddLabel = this.add.bitmapText(400, 215, "pixelFont", ' = ', 36);
-    this.enemySubLabel = this.add.bitmapText(400, 400, "pixelFont", ' = ', 36);
+    this.enemyAddLabel = this.add.bitmapText(228, 360, "pixelFont", ' x' + ' + ' + 'y' + ' = ' + "?", 36);
+    this.enemySubLabel = this.add.bitmapText(484, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
 
 
     /*Enemy*/
@@ -390,21 +390,22 @@ export default class MainScene extends Phaser.Scene {
 
       let enemyObjectValue = eo.data.get('value') + this.towerAddValue ;
       var key = enemyObjectValue.toString();
+
+      //update "Enemy" value (right now adds the differnce between old and new numbers)
+      this.enemyAddLabel.setText(this.towerAddValue + ' + ' + eo.data.get('value') + ' = ' + enemyObjectValue, 36);
+      
       
       //call to make new number
       this.enemyChange(eo.x, eo.y, eo.data.get('value'), key);
 
       //destroy old number
       enemy.destroy();
+      }
     
-
-      //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemyAddLabel.setText(' = ' + enemyObjectValue, 36);
-      }
-
       if(this.towerAddValue == 0) {
-        this.enemyAddLabel.setText(' = ' + eo.data.get('value'), 36);
+        this.enemyAddLabel.setText('0' + ' + ' + eo.data.get('value') + ' = ' + eo.data.get('value'), 36);
       }
+     
     }     
   }
 
@@ -420,20 +421,20 @@ export default class MainScene extends Phaser.Scene {
 
       let enemyValueSub = eo.data.get('value') - this.towerSubValue;
       var key = enemyValueSub.toString();
+
+      
+      //update "Enemy" value (right now adds the differnce between old and new numbers)
+      this.enemySubLabel.setText(eo.data.get('value') + ' - ' + this.towerSubValue + ' = ' + enemyValueSub, 36);
       
       //call to make new number
       this.enemyChangeSub(eo.x, eo.y, eo.data.get('value'), key);
 
       //destroy old number
       enemy.destroy();
-    
-
-      //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemySubLabel.setText(' = ' + enemyValueSub, 36);
       }
 
       if(this.towerSubValue == 0) {
-        this.enemySubLabel.setText(' = ' + eo.data.get('value'), 36);
+        this.enemySubLabel.setText(eo.data.get('value') + ' - ' + '0' + ' = ' + eo.data.get('value'), 36);
       }
     }     
   }

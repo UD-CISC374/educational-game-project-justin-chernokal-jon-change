@@ -7,6 +7,8 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("menuBackground", "./assets/images/menuBackground.png");
     this.load.image("startButton", "./assets/images/startButton.png");
 
+    /* TOWER IMAGES */
+
     this.load.spritesheet("addTower", "./assets/spritesheets/tower_add.png", {
       frameWidth: 128,
       frameHeight: 64
@@ -69,6 +71,17 @@ export default class PreloadScene extends Phaser.Scene {
 
     /* Font */
     this.load.bitmapFont("pixelFont", "./assets/font/font.png", "assets/font/font.xml");
+
+    /* SOUNDS */
+    //music
+    this.load.audio("startMusic", "assets/Sounds/Hardmoon_-_Deep_space.mp3");
+    this.load.audio("mainMusic", "assets/Sounds/PetterTheSturgeon - Anything_1.waw_.mp3");
+
+    //sound effects
+    this.load.audio("change1", "assets/Sounds/change_noise_1.mp3");
+    this.load.audio("change2", "assets/Sounds/change_noise_2.mp3");
+
+
 
 
   }

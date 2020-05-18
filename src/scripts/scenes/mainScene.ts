@@ -32,6 +32,7 @@ export default class MainScene extends Phaser.Scene {
   towerAddValue = 1;
   towerSubValue = 1;
   
+  nextNumLabel;
 
   enemyAddLabel;
   enemySubLabel;
@@ -40,6 +41,8 @@ export default class MainScene extends Phaser.Scene {
 
   scoreLabel;
   score = 0;
+
+  music;
 
 
 
@@ -76,6 +79,22 @@ export default class MainScene extends Phaser.Scene {
     this.data.set('6', 'enemy6');
     this.data.set('7', 'enemy7');
 
+    /* SOUND */
+    //music
+    this.music = this.sound.add("mainMusic");
+
+    var musicConfig = {
+      mute: false,
+      volume: 1,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: false,
+      delay: 0
+    }
+
+    this.music.play(musicConfig);
+
 
     /* PATH */
     //graphics used for path visualization: background
@@ -91,8 +110,8 @@ export default class MainScene extends Phaser.Scene {
     graphics.fillPath();
 
     //path declaration for enemies
-    this.path = new Phaser.Curves.Path(352, -32);
-    this.path.lineTo(352, 544);
+    this.path = new Phaser.Curves.Path(-32, 288);
+    this.path.lineTo(640, 288);
 
     //graphics used for path visualization: line
     graphics.lineStyle(3, 0xffffff, 1);
@@ -117,21 +136,29 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(260, 394, "Click For", {font: "10px Arial", fill: "white"});
     this.add.text(260, 414, "Subtraction", {font: "10px Arial", fill: "white"});
 
+    // correct text
     this.add.text(120, 460, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
 
+    //Next number warning
+    this.add.text(5,192, "Coming up", {font: "10px Arial", fill: "white"});
+    this.add.text(5,202, "next: ", {font: "10px Arial", fill: "white"});
+    this.nextNumLabel = this.add.bitmapText(22, 202, "pixelFont", ' = ', 24);
+
+    //other label
     this.scoreLabel = this.add.bitmapText(200, 460, "pixelFont", '', 30);
     this.scoreLabel.setText(this.score, 54);
 
+    //add and sub labels
     this.enemyAddLabel = this.add.bitmapText(400, 215, "pixelFont", ' = ', 36);
     this.enemySubLabel = this.add.bitmapText(400, 400, "pixelFont", ' = ', 36);
 
 
     /*Enemy*/
     //spawn
-    this.enemyObject0 = new EnemyObject(this, 352, -460, "enemy0");
-    this.enemyObject = new EnemyObject(this, 352, -10, "enemy1");
-    this.enemyObject2 = new EnemyObject(this, 352, -160, "enemy2");
-    this.enemyObject3 = new EnemyObject(this, 352, -310, "enemy3");
+    this.enemyObject0 = new EnemyObject(this, -460, 288, "enemy0");
+    this.enemyObject = new EnemyObject(this, -10, 288, "enemy1");
+    this.enemyObject2 = new EnemyObject(this, -160, 288, "enemy2");
+    this.enemyObject3 = new EnemyObject(this, -310, 288, "enemy3");
    
     
     //add created enemies to group
@@ -225,13 +252,13 @@ export default class MainScene extends Phaser.Scene {
   /* Enemy Update Functions */
   moveEnemy(){
     //moves enemy one down
-    this.enemies.incY(1);
+    this.enemies.incX(0.75);
   }
 
   killEnemy3(){
     //kills enemy of value three at bottom of screen
     for(let enemy of this.enemies.getChildren()){
-      if ( (enemy as EnemyObject).y >= this.scale.height){
+      if ( (enemy as EnemyObject).x >= this.scale.width){
         if( (enemy as EnemyObject).data.get("value") == 3  ){
           (enemy as EnemyObject).setActive(false);
           (enemy as EnemyObject).destroy();
@@ -246,8 +273,8 @@ export default class MainScene extends Phaser.Scene {
     //respawn eneimes after passing bottom of screen
     
     for(let enemy of this.enemies.getChildren()){
-      if ( (enemy as EnemyObject).y >= this.scale.height){
-          (enemy as EnemyObject).y = -32 
+      if ( (enemy as EnemyObject).x >= this.scale.width){
+          (enemy as EnemyObject).x = -32 
           enemy.data.set("collideAdd", "true");
           enemy.data.set("collideSub", "true");
       }

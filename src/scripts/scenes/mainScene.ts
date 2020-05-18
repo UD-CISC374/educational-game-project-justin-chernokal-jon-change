@@ -114,6 +114,7 @@ export default class MainScene extends Phaser.Scene {
     this.changeSound1 = this.sound.add("change1");
     this.changeSound2 = this.sound.add("change2");
 
+    //* DISPLAY *//
 
     /* PATH */
     //graphics used for path visualization: background
@@ -171,6 +172,15 @@ export default class MainScene extends Phaser.Scene {
     this.enemyAddLabel = this.add.bitmapText(228, 360, "pixelFont", ' x' + ' + ' + 'y' + ' = ' + "?", 36);
     this.enemySubLabel = this.add.bitmapText(474, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
 
+    /* Images */
+    //Background
+     var background = this.add.image(0,0, "asteroid");
+     background.setScale(this.scale.width, this.scale.height);
+
+    //Next num Image
+
+
+    //* Interaction on create *//
 
     /*Enemy*/
     //spawn
@@ -178,7 +188,6 @@ export default class MainScene extends Phaser.Scene {
     this.enemyObject = new EnemyObject(this, -10, 288, "enemy1");
     this.enemyObject2 = new EnemyObject(this, -160, 288, "enemy2");
     this.enemyObject3 = new EnemyObject(this, -310, 288, "enemy3");
-   
     
     //add created enemies to group
     this.enemies = this.physics.add.group();
@@ -231,12 +240,14 @@ export default class MainScene extends Phaser.Scene {
 
   }
 
-  /*Update*/
+  // *Update* //
   update() {
 
     this.moveEnemy();
-    this.killEnemy3();
+    this.killEnemy();
     this.respawnEnemy();
+    this.createEnemy();
+    this.nextEnemy();
     this.endScene();
 
     if (this.game.input.activePointer.isDown) {
@@ -274,7 +285,7 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.incX(0.75);
   }
 
-  killEnemy3(){
+  killEnemy(){
     //kills enemy of value three at bottom of screen
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).x >= this.scale.width){
@@ -300,6 +311,37 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+  createEnemy(){
+    //create new enemies when total is less than 4
+    for(let enemy of this.enemies.getChildren()){
+
+      //ADD delay
+      if ( this.enemies.getLength() < 4){
+
+      //rand num
+      let numRand = Phaser.Math.Between(-9, 9);
+      var key = numRand.toString();
+
+      let newEnemy: EnemyObject = new EnemyObject(this, -64, 288, this.data.get(key)); 
+      this.enemies.add(newEnemy);
+      newEnemy.data.set("value", numRand);
+      newEnemy.data.set("collideSub", "false");
+      newEnemy.data.set("collideAdd", "true");
+      }
+    }
+  }
+
+  nextEnemy(){
+    //show the next enemy coming up off screen
+    var upNext = this.enemies.getFirst();   //retrive first enemy
+    upNext.data.get('value');               // get value of enemy
+                                            // pass value to table to get image 
+                                            // update display image
+
+    //let eo: EnemyObject = enemy as EnemyObject;
+
+    }
+    
 
   endScene(){
     //when no enemies remain return to start screen
@@ -313,7 +355,7 @@ export default class MainScene extends Phaser.Scene {
 
 
 
-  /* Tower Interaction */
+  //* Tower Interaction *//
   
   placeTower() {
     //Place towers
@@ -432,7 +474,7 @@ export default class MainScene extends Phaser.Scene {
         enemy.destroy();
 
         //Animation
-        enemy.play("change_anim");
+       //enemy.play("change_anim");
         }
       }
     }     
@@ -473,7 +515,7 @@ export default class MainScene extends Phaser.Scene {
           enemy.destroy();
 
           //Animation
-          enemy.play("change_anim");
+          //enemy.play("change_anim");
         }
       }     
     }     

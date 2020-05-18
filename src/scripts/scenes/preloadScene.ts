@@ -9,6 +9,10 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("upButton", "./assets/images/btn_up.png");
     this.load.image("downButton", "./assets/images/btn_down.png");
 
+    //* Images *//
+    /* Background */
+    this.load.image("asteroid", "assests/images/asteroid_1.png");
+
     /* TOWER IMAGES */
 
     this.load.spritesheet("addTower", "./assets/spritesheets/tower_add.png", {
@@ -116,7 +120,7 @@ export default class PreloadScene extends Phaser.Scene {
     });
 
     /* Animations */
-    this.load.spritesheet("numChange", "assests/spritesheets/explosion3.png",{
+    this.load.spritesheet("numChange", "./assests/spritesheets/explosion3.png",{
       frameWidth: 64,
       frameHeight: 64
     });
@@ -128,6 +132,7 @@ export default class PreloadScene extends Phaser.Scene {
       repeat: 0
     });
 
+    //* Other contextuals *//
     /* Font */
     this.load.bitmapFont("pixelFont", "./assets/font/font.png", "assets/font/font.xml");
 

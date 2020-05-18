@@ -10,24 +10,33 @@ export default class AddTower extends Phaser.Physics.Arcade.Sprite {
         
         super(scene,x,y,"addTower");
 
-        scene.textAddTowerLabel = scene.add.bitmapText(x - 5, y - 100, "pixelFont", scene.towerAddValue, 50);
+        scene.textAddTowerLabel = scene.add.bitmapText(x - 10, y - 100, "pixelFont", scene.towerAddValue, 50);
 
-        towerButtonUp = scene.add.text(x + 50, y - 100, "<", {fill:'#0f0', fontSize: 40})
+        towerButtonUp = scene.add.image(x + 30, y - 85, "upButton")
         .setInteractive()
+        .on('pointerover', () => {
+            towerButtonUp.setTint(0x00ff00);
+        })
+        .on('pointerout', () => {
+            towerButtonUp.clearTint();
+        })
         .on('pointerdown', () => {
             scene.towerAddValueUp();
         });
 
-        towerButtonUp.angle = 90;
-
-        towerButtonDown = scene.add.text(x - 10, y - 100, ">", {fill:'#0f0', fontSize: 40})
+        towerButtonDown = scene.add.image(x - 30, y - 85, "downButton")
         .setInteractive()
+        .on('pointerover', () => {
+            towerButtonDown.setTint(0x00ff00);
+        })
+        .on('pointerout', () => {
+            towerButtonDown.clearTint();
+        })
         .on('pointerdown', () => {
             scene.towerAddValueDown();
         });
         
-        
-        towerButtonDown.angle = 90;
+
 
         scene.physics.add.sprite(x,y,"addTower");
         //scene.add.existing(this);

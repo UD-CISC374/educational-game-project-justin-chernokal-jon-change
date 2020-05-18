@@ -29,7 +29,7 @@ export default class StartScene extends Phaser.Scene {
         this.music.play(musicConfig);
         
 
-        let startButton = this.add.image(this.scale.width/2, this.scale.height/2, "startButton")
+        let startButton = this.add.image(this.scale.width/2, this.scale.height/2 + 30, "startButton")
         .setInteractive()
         .on('pointerover', () => {
             startButton.setTint(0x00ff00);

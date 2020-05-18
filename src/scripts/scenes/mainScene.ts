@@ -150,7 +150,7 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(518, 350, "Subtraction", {font: "10px Arial", fill: "white"});
 
     // correct text
-    this.add.text(120, 460, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
+    this.add.text(484, 150, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
 
     //Next number warning
     this.add.text(5,192, "Coming up", {font: "10px Arial", fill: "white"});
@@ -158,7 +158,7 @@ export default class MainScene extends Phaser.Scene {
     this.nextNumLabel = this.add.bitmapText(22, 202, "pixelFont", ' = ', 24);
 
     //other label
-    this.scoreLabel = this.add.bitmapText(200, 460, "pixelFont", '', 30);
+    this.scoreLabel = this.add.bitmapText(564, 150, "pixelFont", '', 30);
     this.scoreLabel.setText(this.score, 54);
 
     //add and sub labels
@@ -272,7 +272,7 @@ export default class MainScene extends Phaser.Scene {
     //kills enemy of value three at bottom of screen
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).x >= this.scale.width){
-        if( (enemy as EnemyObject).data.get("value") == this.objective  ){
+        if( (enemy as EnemyObject).data.get("value") == this.objective){
           (enemy as EnemyObject).setActive(false);
           (enemy as EnemyObject).destroy();
           this.score++;

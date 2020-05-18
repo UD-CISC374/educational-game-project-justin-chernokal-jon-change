@@ -69,6 +69,50 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     });
 
+    this.load.spritesheet('enemyN1', "./assets/images/-1.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN2', "./assets/images/-2.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN3', "./assets/images/-3.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN4', "./assets/images/-4.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN5', "./assets/images/-5.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+    this.load.spritesheet('enemyN6', "./assets/images/-6.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN7', "./assets/images/-7.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN8', "./assets/images/-8.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
+    this.load.spritesheet('enemyN9', "./assets/images/-9.png",{
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
     /* Font */
     this.load.bitmapFont("pixelFont", "./assets/font/font.png", "assets/font/font.xml");
 

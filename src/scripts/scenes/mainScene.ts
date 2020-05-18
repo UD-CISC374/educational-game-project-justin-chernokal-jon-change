@@ -78,6 +78,17 @@ export default class MainScene extends Phaser.Scene {
     this.data.set('5', 'enemy5');
     this.data.set('6', 'enemy6');
     this.data.set('7', 'enemy7');
+    this.data.set('8', 'enemy8');
+    this.data.set('9', 'enemy9');
+    this.data.set('-1', 'enemyN1');
+    this.data.set('-2', 'enemyN2');
+    this.data.set('-3', 'enemyN3');
+    this.data.set('-4', 'enemyN4');
+    this.data.set('-5', 'enemyN5');
+    this.data.set('-6', 'enemyN6');
+    this.data.set('-7', 'enemyN7');
+    this.data.set('-8', 'enemyN8');
+    this.data.set('-9', 'enemyN9');
 
     /* SOUND */
     //music
@@ -384,27 +395,37 @@ export default class MainScene extends Phaser.Scene {
 
       let eo: EnemyObject = enemy as EnemyObject; 
 
-      if(this.towerAddValue != 0){
-      
-      enemy.setActive(false);
-
-      let enemyObjectValue = eo.data.get('value') + this.towerAddValue ;
-      var key = enemyObjectValue.toString();
-
-      //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemyAddLabel.setText(this.towerAddValue + ' + ' + eo.data.get('value') + ' = ' + enemyObjectValue, 36);
-      
-      
-      //call to make new number
-      this.enemyChange(eo.x, eo.y, eo.data.get('value'), key);
-
-      //destroy old number
-      enemy.destroy();
-      }
-    
       if(this.towerAddValue == 0) {
         this.enemyAddLabel.setText('0' + ' + ' + eo.data.get('value') + ' = ' + eo.data.get('value'), 36);
       }
+
+      if(this.towerAddValue != 0){
+      
+        enemy.setActive(false);
+
+        let enemyObjectValue = eo.data.get('value') + this.towerAddValue ;
+        
+        if(enemyObjectValue > 9) {
+          this.enemyAddLabel.setText("Max Limit, Subtract!");
+          return;
+        }
+
+        else {
+        var key = enemyObjectValue.toString();
+
+        //update "Enemy" value (right now adds the differnce between old and new numbers)
+        this.enemyAddLabel.setText(this.towerAddValue + ' + ' + eo.data.get('value') + ' = ' + enemyObjectValue, 36);
+        
+        
+        //call to make new number
+        this.enemyChange(eo.x, eo.y, eo.data.get('value'), key);
+
+        //destroy old number
+        enemy.destroy();
+        }
+      }
+    
+      
      
     }     
   }
@@ -415,27 +436,35 @@ export default class MainScene extends Phaser.Scene {
 
       let eo: EnemyObject = enemy as EnemyObject; 
 
-      if(this.towerSubValue != 0){
-      
-      enemy.setActive(false);
-
-      let enemyValueSub = eo.data.get('value') - this.towerSubValue;
-      var key = enemyValueSub.toString();
-
-      
-      //update "Enemy" value (right now adds the differnce between old and new numbers)
-      this.enemySubLabel.setText(eo.data.get('value') + ' - ' + this.towerSubValue + ' = ' + enemyValueSub, 36);
-      
-      //call to make new number
-      this.enemyChangeSub(eo.x, eo.y, eo.data.get('value'), key);
-
-      //destroy old number
-      enemy.destroy();
-      }
-
       if(this.towerSubValue == 0) {
         this.enemySubLabel.setText(eo.data.get('value') + ' - ' + '0' + ' = ' + eo.data.get('value'), 36);
       }
+
+      if(this.towerSubValue != 0){
+      
+        enemy.setActive(false);
+
+        let enemyValueSub = eo.data.get('value') - this.towerSubValue;
+
+        if( enemyValueSub < -9) {
+          this.enemySubLabel.setText("Min Limit, Add!");
+          return;
+        }
+
+        else {
+
+          var key = enemyValueSub.toString();
+    
+          //update "Enemy" value (right now adds the differnce between old and new numbers)
+          this.enemySubLabel.setText(eo.data.get('value') + ' - ' + this.towerSubValue + ' = ' + enemyValueSub, 36);
+          
+          //call to make new number
+          this.enemyChangeSub(eo.x, eo.y, eo.data.get('value'), key);
+
+          //destroy old number
+          enemy.destroy();
+        }
+      }     
     }     
   }
 

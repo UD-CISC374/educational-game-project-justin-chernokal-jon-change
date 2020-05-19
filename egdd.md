@@ -14,11 +14,11 @@ meta:
 
 # Overview
 
-*Notes written in italics must be deleted in the final version.*
+A minigame that puts your math calculation speed to the test!
 
 ## Elevator Pitch
 
-You are introduced to a region in turmoil and you are directed to help. To do so you need to use the numbers/citizens of the region. However, not all citizens have the required numbers. Using provided resources you are to judiciously contruct towers/buildings which will be able to change the numbers and save the day!
+Our supplies are running thin, we need your help to modify the remiaining containers. This fast-paced math minigame puts your calculation speeds to the test, as you are constantly being fed more numbers to change. Can you meet the objectives without losing all your containers?
 
 ## Influences (Brief)
 - Kingdom Rush:
@@ -35,7 +35,7 @@ You are introduced to a region in turmoil and you are directed to help. To do so
 
 ## Core Gameplay Mechanics (Brief)
 
-- Determine and place tower types in set locations on map.
+- Place tower types in set locations on map.
 - Adjust towers' abilities by selecting a number for it to use.
 - Use tower abilities to manipulate numbers to match the goal.
 - Win the level by meeting the goal(s) requirements.

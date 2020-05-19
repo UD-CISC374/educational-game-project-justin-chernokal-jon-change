@@ -45,6 +45,13 @@ export default class MainScene extends Phaser.Scene {
   music;
   changeSound1;
   changeSound2;
+  background;
+  nextNum;
+  nextObject;
+  next;
+
+  changeAddAnim;
+  changeSubAnim;
 
   objective = Phaser.Math.RND.between(-9,9);
 
@@ -100,7 +107,7 @@ export default class MainScene extends Phaser.Scene {
 
     var musicConfig = {
       mute: false,
-      volume: 1,
+      volume: 0.2,
       rate: 1,
       detune: 0,
       seek: 0,
@@ -115,8 +122,7 @@ export default class MainScene extends Phaser.Scene {
     this.changeSound2 = this.sound.add("change2");
 
     //* DISPLAY *//
-
-    /* PATH */
+    
     //graphics used for path visualization: background
     var graphics = this.add.graphics();
     graphics.fillStyle(0x000000, 1);
@@ -129,19 +135,28 @@ export default class MainScene extends Phaser.Scene {
     graphics.closePath();
     graphics.fillPath();
 
+    /* GRID */
+    var graphics = this.add.graphics();
+    //drawGrid function is defined below the update function
+    this.drawGrid(graphics);
+
+    /* Images */
+    //Background
+    this.background = this.add.image(320,120, "asteroid");
+
+
+    /* PATH */
     //path declaration for enemies
     this.path = new Phaser.Curves.Path(-32, 288);
     this.path.lineTo(640, 288);
 
     //graphics used for path visualization: line
+    var graphics = this.add.graphics();
     graphics.lineStyle(3, 0xffffff, 1);
     this.path.draw(graphics);
 
 
-    /* GRID */
-    var graphics = this.add.graphics();
-    //drawGrid function is defined below the update function
-    this.drawGrid(graphics);
+    
 
     /*TEXT*/
     //Text labels
@@ -172,18 +187,13 @@ export default class MainScene extends Phaser.Scene {
     this.enemyAddLabel = this.add.bitmapText(228, 360, "pixelFont", ' x' + ' + ' + 'y' + ' = ' + "?", 36);
     this.enemySubLabel = this.add.bitmapText(474, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
 
-    /* Images */
-    //Background
-     var background = this.add.image(0,0, "asteroid");
-     background.setScale(this.scale.width, this.scale.height);
-
-    //Next num Image
+    
 
 
     //* Interaction on create *//
 
     /*Enemy*/
-    //spawn
+   //spawn 
     this.enemyObject0 = new EnemyObject(this, -460, 288, "enemy0");
     this.enemyObject = new EnemyObject(this, -10, 288, "enemy1");
     this.enemyObject2 = new EnemyObject(this, -160, 288, "enemy2");
@@ -221,11 +231,18 @@ export default class MainScene extends Phaser.Scene {
     this.enemyObject2.data.set("collideSub", "true");
     this.enemyObject3.data.set("collideSub", "true");
     this.enemyObject0.data.set("collideSub", "true");
-
+    
     /* Tower Group */
     this.towersAdd = this.physics.add.group();
     this.towersSub = this.physics.add.group();
+
+    /* Next object */
+    this.nextObject = new ExampleObject(this, -32, 288);
+    this.next = this.physics.add.group();
+    this.next.add(this.nextObject);
+
     
+
 
     /* Overlap Physics */
     this.physics.add.overlap(this.towersAdd, this.enemies, this.towerAdd, function (tower,enemy) {
@@ -236,7 +253,10 @@ export default class MainScene extends Phaser.Scene {
     },
     this);
 
-    console.log(this.enemies.getFirst());
+    this.physics.add.overlap(this.nextObject, this.enemies, this.nextEnemy, function(object, enemy) {
+    },
+    this);
+
 
   }
 
@@ -247,7 +267,6 @@ export default class MainScene extends Phaser.Scene {
     this.killEnemy();
     this.respawnEnemy();
     this.createEnemy();
-    this.nextEnemy();
     this.endScene();
 
     if (this.game.input.activePointer.isDown) {
@@ -304,7 +323,7 @@ export default class MainScene extends Phaser.Scene {
     
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).x >= this.scale.width){
-          (enemy as EnemyObject).x = -32 
+          (enemy as EnemyObject).x = -64
           enemy.data.set("collideAdd", "true");
           enemy.data.set("collideSub", "true");
       }
@@ -314,8 +333,8 @@ export default class MainScene extends Phaser.Scene {
   createEnemy(){
     //create new enemies when total is less than 4
     for(let enemy of this.enemies.getChildren()){
-
-      //ADD delay
+    
+      
       if ( this.enemies.getLength() < 4){
 
       //rand num
@@ -325,23 +344,11 @@ export default class MainScene extends Phaser.Scene {
       let newEnemy: EnemyObject = new EnemyObject(this, -64, 288, this.data.get(key)); 
       this.enemies.add(newEnemy);
       newEnemy.data.set("value", numRand);
-      newEnemy.data.set("collideSub", "false");
+      newEnemy.data.set("collideSub", "true");
       newEnemy.data.set("collideAdd", "true");
       }
     }
   }
-
-  nextEnemy(){
-    //show the next enemy coming up off screen
-    var upNext = this.enemies.getFirst();   //retrive first enemy
-    upNext.data.get('value');               // get value of enemy
-                                            // pass value to table to get image 
-                                            // update display image
-
-    //let eo: EnemyObject = enemy as EnemyObject;
-
-    }
-    
 
   endScene(){
     //when no enemies remain return to start screen
@@ -440,7 +447,7 @@ export default class MainScene extends Phaser.Scene {
 
   /* Enemy & Tower Interaction */
   towerAdd(tower, enemy) {
-
+    
     if(enemy.data.get("collideAdd") ==  "true"){
 
       let eo: EnemyObject = enemy as EnemyObject; 
@@ -450,7 +457,7 @@ export default class MainScene extends Phaser.Scene {
       }
 
       if(this.towerAddValue != 0){
-      
+
         enemy.setActive(false);
 
         let enemyObjectValue = eo.data.get('value') + this.towerAddValue ;
@@ -461,6 +468,19 @@ export default class MainScene extends Phaser.Scene {
         }
 
         else {
+        //Animation
+        this.changeAddAnim = this.add.sprite(256, 288, "numChange");
+        this.changeAddAnim.setScale(8,8);
+        this.changeAddAnim.killOnComplete = true;
+        this.changeAddAnim.play("change_anim", false);
+
+        this.time.addEvent({
+          delay: 1000,
+          callback: this.destroyAddAnim,
+          callbackScope: this,
+          loop: false
+        });
+
         var key = enemyObjectValue.toString();
 
         //update "Enemy" value (right now adds the differnce between old and new numbers)
@@ -472,12 +492,15 @@ export default class MainScene extends Phaser.Scene {
 
         //destroy old number
         enemy.destroy();
-
-        //Animation
-       //enemy.play("change_anim");
+        
+        
+        
         }
+
       }
-    }     
+    } 
+
+    
   }
 
   towerSub(tower, enemy) {
@@ -502,6 +525,18 @@ export default class MainScene extends Phaser.Scene {
         }
 
         else {
+          //Animation
+          this.changeSubAnim = this.add.sprite(516, 288, "numChange");
+          this.changeSubAnim.setScale(8,8);
+
+          this.changeSubAnim.play("change_anim", true);
+
+          this.time.addEvent({
+            delay: 1000,
+            callback: this.destroySubAnim,
+            callbackScope: this,
+            loop: false
+          });
 
           var key = enemyValueSub.toString();
     
@@ -514,8 +549,8 @@ export default class MainScene extends Phaser.Scene {
           //destroy old number
           enemy.destroy();
 
-          //Animation
-          //enemy.play("change_anim");
+          
+
         }
       }     
     }     
@@ -530,7 +565,7 @@ export default class MainScene extends Phaser.Scene {
     //sound effect
     var changeConfig ={
       mute: false,
-      volume: 3,
+      volume: 1.5,
       rate: 1,
       detune: 0,
       seek: 0,
@@ -538,14 +573,19 @@ export default class MainScene extends Phaser.Scene {
       delay: 0
     }
 
-    this.changeSound1.play(changeConfig);
+    this.changeSound2.play(changeConfig);
 
     let newEnemy: EnemyObject = new EnemyObject(this, posX, posY, this.data.get(key)); 
     this.enemies.add(newEnemy);
     newEnemy.data.set("value", numNew);
     newEnemy.data.set("collideAdd", "false");
     newEnemy.data.set("collideSub", "true");
+
+    
+
+    
   }
+
 
   //Creates new nubmer object subtraction
   enemyChangeSub(posX, posY, currVal, key){
@@ -554,7 +594,7 @@ export default class MainScene extends Phaser.Scene {
     //sound effect
     var changeConfig ={
       mute: false,
-      volume: 3,
+      volume: 0.75,
       rate: 1,
       detune: 0,
       seek: 0,
@@ -570,5 +610,30 @@ export default class MainScene extends Phaser.Scene {
     newEnemy.data.set("collideSub", "false");
     newEnemy.data.set("collideAdd", "true");
   }
+
+  destroyAddAnim(){
+  this.changeAddAnim.setActive(false);
+  this.changeAddAnim.destroy();
+  }
+
+  destroySubAnim(){
+    this.changeSubAnim.setActive(false);
+    this.changeSubAnim.destroy();
+  }
+
+  /* Update Interaction not handeled in update()*/
+
+
+  nextEnemy(object, enemy){
+    let eo: EnemyObject = enemy as EnemyObject; 
+
+    let enemyValue = eo.data.get('value');
+    
+    var key = enemyValue.toString();
+    this.nextNum = this.add.image(64, 222, this.data.get(key));
+    this.nextNum.setScale(0.5, 0.5);
+    
+  }
+  
 
 }

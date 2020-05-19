@@ -18,7 +18,7 @@ export default class StartScene extends Phaser.Scene {
 
         var musicConfig = {
         mute: false,
-        volume: 1,
+        volume: 0.2,
         rate: 1,
         detune: 0,
         seek: 0,

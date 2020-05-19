@@ -11,7 +11,9 @@ export default class PreloadScene extends Phaser.Scene {
 
     //* Images *//
     /* Background */
-    this.load.image("asteroid", "assests/images/asteroid_1.png");
+    this.load.image("asteroid", "assets/images/asteroid_1.png");
+    this.load.image("z", "./assets/images/z.png");
+
 
     /* TOWER IMAGES */
 
@@ -119,17 +121,9 @@ export default class PreloadScene extends Phaser.Scene {
       frameHeight: 64
     });
 
-    /* Animations */
-    this.load.spritesheet("numChange", "./assests/spritesheets/explosion3.png",{
-      frameWidth: 64,
-      frameHeight: 64
-    });
-
-    this.anims.create({
-      key: "change_anim",
-      frames: this.anims.generateFrameNumbers("numChange", {start: 0, end: 3}),
-      frameRate: 5,
-      repeat: 0
+    this.load.spritesheet("numChange", "assets/spritesheets/explosion.png",{
+      frameWidth: 16,
+      frameHeight: 16
     });
 
     //* Other contextuals *//
@@ -151,6 +145,15 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
+
+    /* Animations */
+    this.anims.create({
+      key: "change_anim",
+      frames: this.anims.generateFrameNumbers("numChange", {start: 4, end: 0}),
+      frameRate: 5,
+      repeat: 0
+    });
+
     this.scene.start('StartScene');
   }
 }

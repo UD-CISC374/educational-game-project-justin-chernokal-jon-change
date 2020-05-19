@@ -15,7 +15,7 @@ Our supplies are running thin, we need your help to modify the remiaining contai
 - Change all numbers to meet the objective; get enough correct to beat the game!
 - Don't let the wrong numbers reach the end of the screen, watch how much life you have left!
 
-![Gameplay_large](/src/assets/screenshots/screencap_large.png)
+![Gameplay_large](/assets/screenshots/screencap_large.png)
 
 ### Video
 

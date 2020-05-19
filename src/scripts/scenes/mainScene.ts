@@ -100,7 +100,7 @@ export default class MainScene extends Phaser.Scene {
 
     var musicConfig = {
       mute: false,
-      volume: 1,
+      volume: 0.1,       //range from 0.0 - 1.0
       rate: 1,
       detune: 0,
       seek: 0,
@@ -148,8 +148,8 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(20, 30, "Towers will add the value on left to the", {font: "15px Arial", fill: "white"});
     this.add.text(20, 45, "moving objects.", {font: "15px Arial", fill: "white"});
     this.add.text(20, 70, 'Change the tower value by clicking', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 85, '"MORE" and "LESS".', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 150, "Objective: Make Enemy = " + this.objective, {font: "20px Arial", fill: "red"});
+    this.add.text(20, 85, ' Up and Down Arrows.', {font: "15px Arial", fill: "white"});
+    this.add.text(20, 150, "Objective =  " + this.objective, {font: "20px Arial", fill: "red"});
     this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
     this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
     this.add.text(518, 330, "Click For", {font: "10px Arial", fill: "white"});
@@ -241,7 +241,6 @@ export default class MainScene extends Phaser.Scene {
 
     if (this.game.input.activePointer.isDown) {
       this.placeTower();
-
     }
 
     if (this.towerAddCount > 0) {
@@ -307,7 +306,8 @@ export default class MainScene extends Phaser.Scene {
 
       this.map[3][4] = 0;
       this.map[6][4] = 0;
-      this.scene.start('StartScene');
+      this.music.stop();
+      this.scene.start('VictoryScene');
     }
   }
 
@@ -431,8 +431,8 @@ export default class MainScene extends Phaser.Scene {
         //destroy old number
         enemy.destroy();
 
-        //Animation
-        enemy.play("change_anim");
+        //Animation ****CAUSES CRASHING ON COLLISION****
+        //enemy.play("change_anim");
         }
       }
     }     
@@ -472,8 +472,8 @@ export default class MainScene extends Phaser.Scene {
           //destroy old number
           enemy.destroy();
 
-          //Animation
-          enemy.play("change_anim");
+          //Animation ****CAUSES CRASHING ON COLLISION****
+          //enemy.play("change_anim");
         }
       }     
     }     
@@ -488,7 +488,7 @@ export default class MainScene extends Phaser.Scene {
     //sound effect
     var changeConfig ={
       mute: false,
-      volume: 3,
+      volume: 0.25,     //range from 0.0 - 1.0
       rate: 1,
       detune: 0,
       seek: 0,
@@ -512,7 +512,7 @@ export default class MainScene extends Phaser.Scene {
     //sound effect
     var changeConfig ={
       mute: false,
-      volume: 3,
+      volume: 0.25,   //range from 0.0 - 1.0
       rate: 1,
       detune: 0,
       seek: 0,

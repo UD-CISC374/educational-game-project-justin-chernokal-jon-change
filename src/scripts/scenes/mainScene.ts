@@ -42,9 +42,15 @@ export default class MainScene extends Phaser.Scene {
   scoreLabel;
   score = 0;
 
+  lifeLabel;
+  life = 2;
+
   music;
   changeSound1;
   changeSound2;
+
+  towerSpaceAdd;
+  towerSpaceSub;
 
   objective = Phaser.Math.RND.between(-9,9);
 
@@ -144,33 +150,33 @@ export default class MainScene extends Phaser.Scene {
 
     /*TEXT*/
     //Text labels
-    this.add.text(20, 5, "Click the specified location to place a tower.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 30, "Towers will add the value on left to the", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 45, "moving objects.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 70, 'Change the tower value by clicking', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 85, ' Up and Down Arrows.', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 150, "Objective =  " + this.objective, {font: "20px Arial", fill: "red"});
-    this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
-    this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
-    this.add.text(518, 330, "Click For", {font: "10px Arial", fill: "white"});
-    this.add.text(518, 350, "Subtraction", {font: "10px Arial", fill: "white"});
+    
+    this.add.text(20, 150, "Objective = " + this.objective, {font: "30px Arial", fill: "white"});
 
     // correct text
-    this.add.text(484, 150, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
-
+    this.add.text(435, 150, "Correct:    / 4", {font: "25px Arial", fill: "lightgreen"});
+    // life text
+    this.add.text(480, 100, "Life:    / 2", {font: "25px Arial", fill: "red"});
     //Next number warning
     this.add.text(5,192, "Coming up", {font: "10px Arial", fill: "white"});
     this.add.text(5,202, "next: ", {font: "10px Arial", fill: "white"});
     this.nextNumLabel = this.add.bitmapText(22, 202, "pixelFont", ' = ', 24);
 
     //other label
-    this.scoreLabel = this.add.bitmapText(564, 150, "pixelFont", '', 30);
-    this.scoreLabel.setText(this.score, 54);
+    this.scoreLabel = this.add.bitmapText(535, 150, "pixelFont", '', 36);
+    this.scoreLabel.setText(this.score, 36);
+
+    this.lifeLabel = this.add.bitmapText(535, 100, "pixelFont", '', 36);
+    this.lifeLabel.setText(this.life, 36);
 
     //add and sub labels
     this.enemyAddLabel = this.add.bitmapText(228, 360, "pixelFont", ' x' + ' + ' + 'y' + ' = ' + "?", 36);
     this.enemySubLabel = this.add.bitmapText(474, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
 
+    this.towerSpaceAdd = this.add.sprite(290,222,"towerSpace");
+    this.towerSpaceSub = this.add.sprite(548,350,"towerSpace");
+    this.towerSpaceAdd.play("towerSpace_anim",true);
+    this.towerSpaceSub.play("towerSpace_anim",true);
 
     /*Enemy*/
     //spawn
@@ -236,7 +242,6 @@ export default class MainScene extends Phaser.Scene {
 
     this.moveEnemy();
     this.killEnemy3();
-    this.respawnEnemy();
     this.endScene();
 
     if (this.game.input.activePointer.isDown) {
@@ -278,34 +283,41 @@ export default class MainScene extends Phaser.Scene {
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).x >= this.scale.width){
         if( (enemy as EnemyObject).data.get("value") == this.objective){
-          (enemy as EnemyObject).setActive(false);
-          (enemy as EnemyObject).destroy();
+          
           this.score++;
           this.scoreLabel.setText(this.score, 36);
-        }  
+        }
+
+        else {
+          this.life--;
+          this.lifeLabel.setText(this.life, 36);
+        }
+        
+        (enemy as EnemyObject).setActive(false);
+        (enemy as EnemyObject).destroy();
       }
     }
   }
 
-  respawnEnemy(){
-    //respawn eneimes after passing bottom of screen
-    
-    for(let enemy of this.enemies.getChildren()){
-      if ( (enemy as EnemyObject).x >= this.scale.width){
-          (enemy as EnemyObject).x = -32 
-          enemy.data.set("collideAdd", "true");
-          enemy.data.set("collideSub", "true");
-      }
-    }
-  }
 
 
   endScene(){
     //when no enemies remain return to start screen
+
+    if (this.life <= 0) {
+      this.map[3][4] = 0;
+      this.map[6][4] = 0;
+      this.score = 0;
+      this.life = 2;
+      this.music.stop();
+      this.scene.start('DefeatScene');
+    }
     if (this.enemies.getTotalUsed() == 0){
 
       this.map[3][4] = 0;
       this.map[6][4] = 0;
+      this.score = 0;
+      this.life = 2;
       this.music.stop();
       this.scene.start('VictoryScene');
     }
@@ -330,6 +342,8 @@ export default class MainScene extends Phaser.Scene {
 
       this.towersAdd.add(tower);
 
+      this.towerSpaceAdd.destroy();
+
       this.map[i][j] = 1;
 
       this.towerAddCount += 1;
@@ -344,6 +358,7 @@ export default class MainScene extends Phaser.Scene {
       var tower = new SubTower(this,i,j,this.map);
 
       this.towersSub.add(tower);
+      this.towerSpaceSub.destroy();
 
       this.map[i][j] = 1;
 
@@ -355,8 +370,8 @@ export default class MainScene extends Phaser.Scene {
   /* Tower Value Manipulation */
   //Add Tower 
   towerAddValueUp() {
-    if(this.towerAddValue >= 3) {
-      this.towerAddValue = 3;
+    if(this.towerAddValue >= 9) {
+      this.towerAddValue = 9;
     }
 
     else {
@@ -376,8 +391,8 @@ export default class MainScene extends Phaser.Scene {
 
   //Sub Tower
   towerSubValueUp() {
-    if(this.towerSubValue >= 3) {
-      this.towerSubValue = 3;
+    if(this.towerSubValue >= 9) {
+      this.towerSubValue = 9;
     }
 
     else {

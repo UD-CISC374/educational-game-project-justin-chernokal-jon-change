@@ -6,12 +6,18 @@ export default class PreloadScene extends Phaser.Scene {
   preload() {
     this.load.image("menuBackground", "./assets/images/menuBackground.png");
     this.load.image("victoryBackground", "./assets/images/victoryBackground.png");
+    this.load.image("defeatBackground", "./assets/images/defeatBackground.png");
     this.load.image("startButton", "./assets/images/startButton.png");
     this.load.image("restartButton", "./assets/images/restartButton.png");
     this.load.image("upButton", "./assets/images/btn_up.png");
     this.load.image("downButton", "./assets/images/btn_down.png");
 
     /* TOWER IMAGES */
+
+    this.load.spritesheet("towerSpace", "./assets/spritesheets/towerSpace.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
 
     this.load.spritesheet("addTower", "./assets/spritesheets/tower_add.png", {
       frameWidth: 128,
@@ -148,6 +154,13 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
+    this.anims.create({
+      key: "towerSpace_anim",
+      frames: this.anims.generateFrameNumbers("towerSpace", {start: 0, end: 3}),
+      frameRate: 15,
+      repeat: -1  
+    });
+
     this.scene.start('StartScene');
   }
 }

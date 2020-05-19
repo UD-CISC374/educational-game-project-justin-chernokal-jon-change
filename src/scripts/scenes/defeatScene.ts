@@ -1,6 +1,6 @@
-export default class StartScene extends Phaser.Scene {
+export default class DefeatScene extends Phaser.Scene {
     constructor() {
-      super({ key: 'StartScene' });
+      super({ key: 'DefeatScene' });
 
    
     }
@@ -10,7 +10,7 @@ export default class StartScene extends Phaser.Scene {
     };
   
     create() {
-        this.add.image(this.scale.width/2, this.scale.height/2, "menuBackground");
+        this.add.image(this.scale.width/2, this.scale.height/2, "defeatBackground");
 
         /* SOUND */
         //music
@@ -29,7 +29,7 @@ export default class StartScene extends Phaser.Scene {
         this.music.play(musicConfig);
         
 
-        let startButton = this.add.image(this.scale.width/2, this.scale.height/2 + 30, "startButton")
+        let startButton = this.add.image(this.scale.width/2, this.scale.height/2 - 100, "restartButton")
         .setInteractive()
         .on('pointerover', () => {
             startButton.setTint(0x00ff00);

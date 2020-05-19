@@ -42,6 +42,9 @@ export default class MainScene extends Phaser.Scene {
   scoreLabel;
   score = 0;
 
+  lifeLabel;
+  life = 8;
+
   music;
   changeSound1;
   changeSound2;
@@ -52,6 +55,9 @@ export default class MainScene extends Phaser.Scene {
 
   changeAddAnim;
   changeSubAnim;
+
+  towerSpaceAdd;
+  towerSpaceSub;
 
   objective = Phaser.Math.RND.between(-9,9);
 
@@ -107,7 +113,7 @@ export default class MainScene extends Phaser.Scene {
 
     var musicConfig = {
       mute: false,
-      volume: 0.2,
+      volume: 0.1,       //range from 0.0 - 1.0
       rate: 1,
       detune: 0,
       seek: 0,
@@ -135,14 +141,14 @@ export default class MainScene extends Phaser.Scene {
     graphics.closePath();
     graphics.fillPath();
 
-    /* GRID */
-    var graphics = this.add.graphics();
+    /* GRID */  //for dev work only
+    //var graphics = this.add.graphics();
     //drawGrid function is defined below the update function
-    this.drawGrid(graphics);
+    //this.drawGrid(graphics);
 
     /* Images */
     //Background
-    this.background = this.add.image(320,120, "asteroid");
+    this.background = this.add.image(320,100, "asteroid");
 
 
     /* PATH */
@@ -160,44 +166,39 @@ export default class MainScene extends Phaser.Scene {
 
     /*TEXT*/
     //Text labels
-    this.add.text(20, 5, "Click the specified location to place a tower.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 30, "Towers will add the value on left to the", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 45, "moving objects.", {font: "15px Arial", fill: "white"});
-    this.add.text(20, 70, 'Change the tower value by clicking', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 85, '"MORE" and "LESS".', {font: "15px Arial", fill: "white"});
-    this.add.text(20, 150, "Objective: Make Enemy = " + this.objective, {font: "20px Arial", fill: "red"});
-    this.add.text(260, 202, "Click For", {font: "10px Arial", fill: "white"});
-    this.add.text(260, 222, "Addition", {font: "10px Arial", fill: "white"});
-    this.add.text(518, 330, "Click For", {font: "10px Arial", fill: "white"});
-    this.add.text(518, 350, "Subtraction", {font: "10px Arial", fill: "white"});
+    
+    this.add.text(20, 150, "Objective = " + this.objective, {font: "30px Arial", fill: "white"});
 
     // correct text
-    this.add.text(484, 150, "Correct:    / 4", {font: "20px Arial", fill: "lightgreen"});
-
+    this.add.text(435, 150, "Correct:    / 4", {font: "25px Arial", fill: "lightgreen"});
+    // life text
+    this.add.text(480, 100, "Life:    / 8", {font: "25px Arial", fill: "red"});
     //Next number warning
-    this.add.text(5,192, "Coming up", {font: "10px Arial", fill: "white"});
-    this.add.text(5,202, "next: ", {font: "10px Arial", fill: "white"});
-    this.nextNumLabel = this.add.bitmapText(22, 202, "pixelFont", ' = ', 24);
+    this.add.text(5,192, "Coming up next = ", {font: "15px Arial", fill: "white"});
+  
 
     //other label
-    this.scoreLabel = this.add.bitmapText(564, 150, "pixelFont", '', 30);
-    this.scoreLabel.setText(this.score, 54);
+    this.scoreLabel = this.add.bitmapText(535, 150, "pixelFont", '', 36);
+    this.scoreLabel.setText(this.score, 36);
+
+    this.lifeLabel = this.add.bitmapText(535, 100, "pixelFont", '', 36);
+    this.lifeLabel.setText(this.life, 36);
 
     //add and sub labels
     this.enemyAddLabel = this.add.bitmapText(228, 360, "pixelFont", ' x' + ' + ' + 'y' + ' = ' + "?", 36);
-    this.enemySubLabel = this.add.bitmapText(474, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
+    this.enemySubLabel = this.add.bitmapText(434, 212, "pixelFont", ' y' + ' - ' + 'x' + ' = ' + "?", 36);
 
-    
-
-
-    //* Interaction on create *//
+    this.towerSpaceAdd = this.add.sprite(290,222,"towerSpace");
+    this.towerSpaceSub = this.add.sprite(548,350,"towerSpace");
+    this.towerSpaceAdd.play("towerSpace_anim",true);
+    this.towerSpaceSub.play("towerSpace_anim",true);
 
     /*Enemy*/
    //spawn 
-    this.enemyObject0 = new EnemyObject(this, -460, 288, "enemy0");
+    this.enemyObject0 = new EnemyObject(this, -410, 288, "enemy0");
     this.enemyObject = new EnemyObject(this, -10, 288, "enemy1");
-    this.enemyObject2 = new EnemyObject(this, -160, 288, "enemy2");
-    this.enemyObject3 = new EnemyObject(this, -310, 288, "enemy3");
+    this.enemyObject2 = new EnemyObject(this, -210, 288, "enemy2");
+    this.enemyObject3 = new EnemyObject(this, -610, 288, "enemy3");
     
     //add created enemies to group
     this.enemies = this.physics.add.group();
@@ -205,20 +206,12 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.add(this.enemyObject);
     this.enemies.add(this.enemyObject2);
     this.enemies.add(this.enemyObject3); 
-    // this.enemies.add(this.enemyObject4);
-    // this.enemies.add(this.enemyObject5);
-    // this.enemies.add(this.enemyObject6);
-    // this.enemies.add(this.enemyObject7); 
 
     //Give enemies reference values
     this.enemyObject.data.set("value", 1);
     this.enemyObject2.data.set("value", 2);
     this.enemyObject3.data.set("value", 3);
     this.enemyObject0.data.set("value", 0);
-    // this.enemyObject4.data.set("value", 4);
-    // this.enemyObject5.data.set("value", 5);
-    // this.enemyObject6.data.set("value", 6);
-    // this.enemyObject7.data.set("value", 7);
 
     //Number tower Collision - Add
     this.enemyObject.data.set("collideAdd", "true");
@@ -265,13 +258,11 @@ export default class MainScene extends Phaser.Scene {
 
     this.moveEnemy();
     this.killEnemy();
-    this.respawnEnemy();
     this.createEnemy();
     this.endScene();
 
     if (this.game.input.activePointer.isDown) {
       this.placeTower();
-
     }
 
     if (this.towerAddCount > 0) {
@@ -309,23 +300,18 @@ export default class MainScene extends Phaser.Scene {
     for(let enemy of this.enemies.getChildren()){
       if ( (enemy as EnemyObject).x >= this.scale.width){
         if( (enemy as EnemyObject).data.get("value") == this.objective){
-          (enemy as EnemyObject).setActive(false);
-          (enemy as EnemyObject).destroy();
+          
           this.score++;
           this.scoreLabel.setText(this.score, 36);
-        }  
-      }
-    }
-  }
+        }
 
-  respawnEnemy(){
-    //respawn eneimes after passing bottom of screen
-    
-    for(let enemy of this.enemies.getChildren()){
-      if ( (enemy as EnemyObject).x >= this.scale.width){
-          (enemy as EnemyObject).x = -64
-          enemy.data.set("collideAdd", "true");
-          enemy.data.set("collideSub", "true");
+        else {
+          this.life--;
+          this.lifeLabel.setText(this.life, 36);
+        }
+        
+        (enemy as EnemyObject).setActive(false);
+        (enemy as EnemyObject).destroy();
       }
     }
   }
@@ -341,7 +327,7 @@ export default class MainScene extends Phaser.Scene {
       let numRand = Phaser.Math.Between(-9, 9);
       var key = numRand.toString();
 
-      let newEnemy: EnemyObject = new EnemyObject(this, -64, 288, this.data.get(key)); 
+      let newEnemy: EnemyObject = new EnemyObject(this, -128, 288, this.data.get(key)); 
       this.enemies.add(newEnemy);
       newEnemy.data.set("value", numRand);
       newEnemy.data.set("collideSub", "true");
@@ -350,13 +336,26 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+
   endScene(){
     //when no enemies remain return to start screen
-    if (this.enemies.getTotalUsed() == 0){
+
+    if (this.life <= 0) {
+      this.map[3][4] = 0;
+      this.map[6][4] = 0;
+      this.score = 0;
+      this.life = 2;
+      this.music.stop();
+      this.scene.start('DefeatScene');
+    }
+    if (this.score == 4){
 
       this.map[3][4] = 0;
       this.map[6][4] = 0;
-      this.scene.start('StartScene');
+      this.score = 0;
+      this.life = 2;
+      this.music.stop();
+      this.scene.start('VictoryScene');
     }
   }
 
@@ -379,6 +378,8 @@ export default class MainScene extends Phaser.Scene {
 
       this.towersAdd.add(tower);
 
+      this.towerSpaceAdd.destroy();
+
       this.map[i][j] = 1;
 
       this.towerAddCount += 1;
@@ -393,6 +394,7 @@ export default class MainScene extends Phaser.Scene {
       var tower = new SubTower(this,i,j,this.map);
 
       this.towersSub.add(tower);
+      this.towerSpaceSub.destroy();
 
       this.map[i][j] = 1;
 
@@ -404,8 +406,8 @@ export default class MainScene extends Phaser.Scene {
   /* Tower Value Manipulation */
   //Add Tower 
   towerAddValueUp() {
-    if(this.towerAddValue >= 3) {
-      this.towerAddValue = 3;
+    if(this.towerAddValue >= 9) {
+      this.towerAddValue = 9;
     }
 
     else {
@@ -425,8 +427,8 @@ export default class MainScene extends Phaser.Scene {
 
   //Sub Tower
   towerSubValueUp() {
-    if(this.towerSubValue >= 3) {
-      this.towerSubValue = 3;
+    if(this.towerSubValue >= 9) {
+      this.towerSubValue = 9;
     }
 
     else {
@@ -492,9 +494,7 @@ export default class MainScene extends Phaser.Scene {
 
         //destroy old number
         enemy.destroy();
-        
-        
-        
+
         }
 
       }
@@ -565,7 +565,7 @@ export default class MainScene extends Phaser.Scene {
     //sound effect
     var changeConfig ={
       mute: false,
-      volume: 1.5,
+      volume: 0.25,     //range from 0.0 - 1.0
       rate: 1,
       detune: 0,
       seek: 0,
@@ -594,7 +594,7 @@ export default class MainScene extends Phaser.Scene {
     //sound effect
     var changeConfig ={
       mute: false,
-      volume: 0.75,
+      volume: 0.25,   //range from 0.0 - 1.0
       rate: 1,
       detune: 0,
       seek: 0,
@@ -630,7 +630,7 @@ export default class MainScene extends Phaser.Scene {
     let enemyValue = eo.data.get('value');
     
     var key = enemyValue.toString();
-    this.nextNum = this.add.image(64, 222, this.data.get(key));
+    this.nextNum = this.add.image(150, 200, this.data.get(key));
     this.nextNum.setScale(0.5, 0.5);
     
   }

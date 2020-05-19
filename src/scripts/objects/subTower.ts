@@ -21,7 +21,7 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
 
         scene.textSubTowerLabel = scene.add.bitmapText(x - 5, y + 75, "pixelFont", scene.towerSubValue, 50);
 
-        towerButtonUp = scene.add.image(x + 50, y + 75, "upButton")
+        towerButtonUp = scene.add.image(x + 32, y + 88, "upButton")
         .setInteractive()
         .on('pointerover', () => {
             towerButtonUp.setTint(0x00ff00);
@@ -34,9 +34,7 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
             scene.towerSubValueUp();
         });
 
-        towerButtonUp.angle = 90;
-
-        towerButtonDown = scene.add.image(x - 10, y + 75, "downButton")
+        towerButtonDown = scene.add.image(x - 30, y + 88, "downButton")
         .setInteractive()
         .on('pointerover', () => {
             towerButtonDown.setTint(0x00ff00);
@@ -48,8 +46,6 @@ export default class subTower extends Phaser.Physics.Arcade.Sprite {
             scene.towerSubValueDown();
         })
 
-         towerButtonDown.angle = 90;
-        
         
         scene.physics.add.sprite(x,y,"subTower");
 

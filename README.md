@@ -1,8 +1,9 @@
-#**Calculated Assault**
+# **Calculated Assault**
+
 A fun minigame that puts your math speed to the test!
 
-##Developers: Jon Chang
-##            Justin Chernokal
+** Developers: Jon Chang **
+**              Justin Chernokal **
             
 
 

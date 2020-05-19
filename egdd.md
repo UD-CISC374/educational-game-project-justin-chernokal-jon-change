@@ -18,7 +18,7 @@ A minigame that puts your math calculation speed to the test!
 
 ## Elevator Pitch
 
-Our supplies are running thin, we need your help to modify the remiaining containers. This fast-paced math minigame puts your calculation speeds to the test, as you are constantly being fed more numbers to change. Can you meet the objectives without losing all your containers?
+A meteor is heading for the space station! You must fix the rocket with the required number parts to destroy the meteor, however not all numbered parts will work. Use the “mechanic shops” to change numbered parts and save the day! This game is designed as practice utilizing foundational math operations such as addition and subtraction. Players will need to utilize operations, in the form of “towers”,  to adjust a given number into another. The core mechanic involves adjusting these towers’ values to be added, or subtracted to the given value as it slides across the screen. The aim is that players continue practicing these operations at a steady pace so that they will eventually be able to do simple math quickly and efficiently to build a strong foundation for their future math endeavours. 
 
 ## Influences (Brief)
 - Kingdom Rush:
@@ -79,7 +79,6 @@ Open response or multiple chioce algebra test.
 
 - Given an equation with a variable, solve for the variable.
 - Given an equation with two or more operations, apply order of operations.
-- Given complex algebra problem, should be able to solve in open response format showing their work.
 - Given simple algebra problems, should be able to solve in mulitple choice format.
 
 # What sets this project apart?
@@ -176,35 +175,21 @@ Click to place towers, click to change tower operation increments.
 - Characters List
   - Addition tower: some building/tower sprite
   - Subtratcion tower: ""
-  - Mulitplication tower: ""
-  - Division tower: ""
-  - Monster/Demon/Thief: Negative Numbers
-  - Farmer: Number 0 display on top of sprite
-  - Tailor: Number 1
-  - Buthcer: Number 2
-  - Shepard: Number 3
-  - Blacksmith: Number 4
-  - Flecther: Number 5
-  - Weaver: Number 6
-  - Inn Keeper: Number 7
-  - Mill Worker: Number 8
-  - Barber: Number 9
-  - Artist: Number 10
-  - Soldier: Number 11
-  - King: Number 12
-  - Queen: Number 13
-  - Princess: Number 14
-  - Prince: Number 15
-  - Knight: Number 16
-  - Baker: Number 17
-  - Chef: Number 18
-  - Craftsman: Number 19
-  - LumberJack: Number 20
+  - Number 0 
+  - Number 1 & negative
+  - Number 2 & negative
+  - Number 3 & negative
+  - Number 4 & negative
+  - Number 5 & negative
+  - Number 6 & negative
+  - Number 7 & negative
+  - Number 8 & negative
+  - Number 9 & negative
   
 - Textures: N/A
 
 - Environment Art/Textures:
-  - Backgorund: should be a grassy area, some other aesthetic choices can be included.
+  - Backgorund: Spacw with asteroid
 
 ## Audio
 
@@ -216,9 +201,5 @@ Click to place towers, click to change tower operation increments.
 - Sound List (SFX)
   - Addition tower change of number: a distinct wooshing
   - Substration tower change of number: ""
-  - Multiplication tower change of number: ""
-  - Division tower change of number: ""
-  - Bad guy spawn (number become negative): clear resounding sound, but not alltogether bad sounding
-  - Correct number entering goal: dinging/positive ring sound
-  - Wrong number entering goal: an "ooph" sound
-  - Win sound effect
+ 
+

@@ -6,7 +6,7 @@ A fun minigame that puts your math speed to the test!
             **, Justin Chernokal**
             
 ## Intro Blurb:
-Our supplies are running thin, we need your help to modify the remiaining containers. This fast-paced math minigame puts your calculation speeds to the test, as you are constantly being fed more numbers to change. Can you meet the objectives without losing all your containers?
+Our supplies are running thin, we need your help to modify the remaining containers. This fast-paced math minigame puts your calculation speeds to the test, as you are constantly being fed more numbers to change. Can you meet the objectives without losing all your containers?
 
 
 ### Instructions:

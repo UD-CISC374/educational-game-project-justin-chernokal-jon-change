@@ -5,7 +5,8 @@ A fun minigame that puts your math speed to the test!
 **Developers: Jon Chang**
             **, Justin Chernokal**
             
-
+## Intro Blurb:
+Our supplies are running thin, we need your help to modify the remiaining containers. This fast-paced math minigame puts your calculation speeds to the test, as you are constantly being fed more numbers to change. Can you meet the objectives without losing all your containers?
 
 
 ### Instructions:

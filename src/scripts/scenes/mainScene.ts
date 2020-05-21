@@ -344,7 +344,7 @@ export default class MainScene extends Phaser.Scene {
       this.map[3][4] = 0;
       this.map[5][8] = 2;
       this.score = 0;
-      this.life = 2;
+      this.life = 8;
       this.music.stop();
       this.scene.start('DefeatScene');
     }
@@ -353,7 +353,7 @@ export default class MainScene extends Phaser.Scene {
       this.map[3][4] = 0;
       this.map[5][8] = 2;
       this.score = 0;
-      this.life = 2;
+      this.life = 8;
       this.music.stop();
       this.scene.start('VictoryScene');
     }

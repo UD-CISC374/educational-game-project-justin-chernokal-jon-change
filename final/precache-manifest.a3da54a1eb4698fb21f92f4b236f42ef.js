@@ -140,7 +140,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/finalassets/images/9.png"
   },
   {
-    "revision": "f0650168bf2c27695200bb0eb18a623d",
+    "revision": "d0f01f97b3a82221612422f50751ce3c",
     "url": "/educational-game-project-justin-chernokal-jon-change/finalassets/images/asteroid_1.png"
   },
   {
@@ -196,6 +196,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/finalassets/images/z.png"
   },
   {
+    "revision": "80034bb148cd8e095e654e01b88b0b03",
+    "url": "/educational-game-project-justin-chernokal-jon-change/finalassets/screenshots/screencap_large.PNG"
+  },
+  {
+    "revision": "d452663243840e8c46eca88f13de4ce6",
+    "url": "/educational-game-project-justin-chernokal-jon-change/finalassets/screenshots/screencap_small.png"
+  },
+  {
     "revision": "ea801e18a4f14b0c4740b555536b414e",
     "url": "/educational-game-project-justin-chernokal-jon-change/finalassets/spritesheets/explosion.png"
   },
@@ -216,15 +224,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-justin-chernokal-jon-change/finalfavicon.ico"
   },
   {
-    "revision": "95c1a14a950458c638e9",
-    "url": "/educational-game-project-justin-chernokal-jon-change/finalgen.main.6634685f3ef519c0a0b8.bundle.js"
+    "revision": "c7c72616a46a31087a31",
+    "url": "/educational-game-project-justin-chernokal-jon-change/finalgen.main.4c8ad75bb395ab75c5b2.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-justin-chernokal-jon-change/finalgen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "6761dba8fe1f7ab57751bc90422f96fd",
+    "revision": "6d0d3c4f328288444a6571812ee4488e",
     "url": "/educational-game-project-justin-chernokal-jon-change/finalindex.html"
   },
   {
